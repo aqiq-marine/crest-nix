@@ -49,7 +49,7 @@
 
       nativeBuildInputs = commonNative;
 
-      buildInputs = [ mctc-lib ];
+      buildInputs = [ mctc-lib ] ++ linalg;
 
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
