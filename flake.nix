@@ -14,10 +14,10 @@
     commonNative = with pkgs; [ cmake gfortran ];
 
     linalg = with pkgs; [ openblas lapack ];
-    openmp = with pkgs; [ mpi ];
-    toml-f = with pkgs; [ toml-f ];
-    dftd4 = with pkgs; [ dftd4 ];
-    s-dftd3 = with pkgs; [simple-dftd3 ];
+    openmp = pkgs.mpi;
+    toml-f = pkgs.toml-f;
+    dftd4 = pkgs.dftd4;
+    s-dftd3 = pkgs.simple-dftd3;
 
     mctc-lib = pkgs.stdenv.mkDerivation {
       pname = "mctc-lib";
