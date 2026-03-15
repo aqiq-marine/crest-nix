@@ -36,6 +36,24 @@
       '';
     };
 
+    mstore = pkgs.stdenv.mkDerivation {
+      pname = "mstore";
+      version = "0.3.0";
+    
+      src = pkgs.fetchFromGitHub {
+        owner = "grimme-lab";
+        repo = "mstore";
+        rev = "v0.3.0";
+        sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+      };
+    
+      nativeBuildInputs = commonNative;
+    
+      cmakeFlags = [
+        "-DCMAKE_BUILD_TYPE=Release"
+      ];
+    };
+
     multicharge = pkgs.stdenv.mkDerivation {
       pname = "multicharge";
       version = "0.3.0";
@@ -49,7 +67,10 @@
 
       nativeBuildInputs = commonNative;
 
-      buildInputs = [ mctc-lib ] ++ linalg;
+      buildInputs = [
+        mctc-lib
+        mstore
+      ] ++ linalg;
 
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
