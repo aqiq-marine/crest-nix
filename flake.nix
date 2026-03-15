@@ -106,6 +106,7 @@
       };
 
       nativeBuildInputs = [
+        pkgs.pkg-config
         openmp
         mctc-lib
         mstore
@@ -126,6 +127,7 @@
       ] ++ linalg;
 
       cmakeFlags = [
+        "-DFETCHCONTENT_FULLY_DISCONNECTED=ON"
         "-DCMAKE_BUILD_TYPE=Release"
       ];
 
