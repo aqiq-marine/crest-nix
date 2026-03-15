@@ -1,0 +1,26 @@
+name: nix-build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v9
+
+      - name: Enable Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@v3
+
+      - name: Build flake
+        run: nix build .#default
+
+      - name: Run binary
+        run: |
+          ./result/bin/crest --help || true
