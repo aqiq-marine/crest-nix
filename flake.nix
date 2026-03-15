@@ -30,6 +30,10 @@
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
       ];
+
+      postInstall = ''
+        rm -f $out/lib/pkgconfig/*.pc
+      ''
     };
 
     multicharge = pkgs.stdenv.mkDerivation {
