@@ -48,6 +48,10 @@
       };
     
       nativeBuildInputs = commonNative;
+
+      buildInputs = [
+        mctc-lib
+      ];
     
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
