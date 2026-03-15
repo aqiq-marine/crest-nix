@@ -105,7 +105,15 @@
         sha256 = "sha256-R7CAFG/x55k5Ieslxeq+DWq1wPip4cI+Yvn1cBbeVNs=";
       };
 
-      nativeBuildInputs = commonNative;
+      nativeBuildInputs = [
+        openmp
+        mctc-lib
+        mstore
+        toml-f
+        dftd4
+        s-dftd3
+        multicharge
+      ] ++ commonNative;
 
       buildInputs = [
         openmp
