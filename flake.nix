@@ -126,6 +126,8 @@
         multicharge
       ] ++ linalg;
 
+      NIX_FFLAGS_COMPILE = "-I${toml-f}/include";
+
       cmakeFlags = [
         "-DFETCHCONTENT_FULLY_DISCONNECTED=ON"
         "-DCMAKE_BUILD_TYPE=Release"
