@@ -16,7 +16,7 @@
     linalg = with pkgs; [ openblas lapack ];
     openmp = with pkgs; [ mpi ];
     toml-f = with pkgs; [ toml-f ];
-    dft-d = with pkgs; [ dftd4 ];
+    dftd4 = with pkgs; [ dftd4 ];
     s-dftd3 = with pkgs; [simple-dftd3 ];
 
     mctc-lib = pkgs.stdenv.mkDerivation {
