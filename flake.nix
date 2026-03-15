@@ -50,7 +50,7 @@
             owner = "crest-lab";
             repo = "crest";
             rev = "v3.0.2";
-            sha256 = "sha256-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=";
+            sha256 = "sha256-AVLCC5banxmBQX8tuN2zSQbM7wKwrymfXLT5MBQSpPY=";
           };
 
           nativeBuildInputs = [
