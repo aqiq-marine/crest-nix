@@ -108,7 +108,7 @@
       nativeBuildInputs = commonNative;
 
       buildInputs = [
-        opemmp
+        openmp
         mctc-lib
         mstore
         toml-f
