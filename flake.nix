@@ -44,7 +44,7 @@
         owner = "grimme-lab";
         repo = "mstore";
         rev = "v0.3.0";
-        sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+        sha256 = "sha256-zfrxdrZ1Um52qTRNGJoqZNQuHhK3xM/mKfk0aBLrcjw=";
       };
     
       nativeBuildInputs = commonNative;
