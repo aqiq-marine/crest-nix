@@ -33,7 +33,7 @@
 
       postInstall = ''
         rm -f $out/lib/pkgconfig/*.pc
-      ''
+      '';
     };
 
     multicharge = pkgs.stdenv.mkDerivation {
