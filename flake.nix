@@ -19,7 +19,7 @@
             owner = "grimme-lab";
             repo = "xtb";
             rev = "v6.7.1";
-            sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+            sha256 = "sha256-+qgXSMwzD0xSycZIRTokt77fZHHZQ++Npzr7NLlypOA=";
           };
 
           nativeBuildInputs = [
