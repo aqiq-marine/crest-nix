@@ -22,7 +22,7 @@
         owner = "grimme-lab";
         repo = "mctc-lib";
         rev = "v0.3.1";
-        sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+        sha256 = "sha256-AXjg/ZsitdDf9fNoGVmVal1iZ4/sxjJb7A9W4yye/rg=";
       };
 
       nativeBuildInputs = commonNative;
@@ -40,7 +40,7 @@
         owner = "grimme-lab";
         repo = "multicharge";
         rev = "v0.3.0";
-        sha256 = "sha256-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=";
+        sha256 = "sha256-W6IqCz9k6kdPxnIIA+eMCrFjf0ELTeK78VvZoyFcZxU=";
       };
 
       nativeBuildInputs = commonNative;
@@ -60,7 +60,7 @@
         owner = "tblite";
         repo = "tblite";
         rev = "v0.3.0";
-        sha256 = "sha256-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC=";
+        sha256 = "sha256-R7CAFG/x55k5Ieslxeq+DWq1wPip4cI+Yvn1cBbeVNs=";
       };
 
       nativeBuildInputs = commonNative;
