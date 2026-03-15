@@ -56,6 +56,10 @@
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
       ];
+
+      postInstall = ''
+        rm -f $out/lib/pkgconfig/*.pc
+      '';
     };
 
     multicharge = pkgs.stdenv.mkDerivation {
@@ -79,6 +83,10 @@
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
       ];
+
+      postInstall = ''
+        rm -f $out/lib/pkgconfig/*.pc
+      '';
     };
 
     tblite = pkgs.stdenv.mkDerivation {
@@ -102,6 +110,10 @@
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
       ];
+
+      postInstall = ''
+        rm -f $out/lib/pkgconfig/*.pc
+      '';
     };
 
     xtb = pkgs.stdenv.mkDerivation {
@@ -130,6 +142,10 @@
         mkdir -p $out/bin
         cp xtb $out/bin/
       '';
+
+      postInstall = ''
+        rm -f $out/lib/pkgconfig/*.pc
+      '';
     };
 
     crest = pkgs.stdenv.mkDerivation {
@@ -157,6 +173,10 @@
       installPhase = ''
         mkdir -p $out/bin
         cp crest $out/bin/
+      '';
+
+      postInstall = ''
+        rm -f $out/lib/pkgconfig/*.pc
       '';
     };
 
