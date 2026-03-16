@@ -117,7 +117,7 @@
       ] ++ commonNative;
 
       buildInputs =
-        [ mctc-lib tblite multicharge dftd4 ]
+        [ mctc-lib tblite multicharge dftd4 pkgs.test-drive ]
         ++ linalg;
 
       cmakeFlags = [
