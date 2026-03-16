@@ -94,7 +94,7 @@
       '';
     };
 
-    tblite = pkgs.tblite
+    tblite = pkgs.tblite;
 
 
     xtb = pkgs.stdenv.mkDerivation {
