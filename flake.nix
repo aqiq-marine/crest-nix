@@ -2,7 +2,7 @@
   description = "CREST + xTB (fully vendored)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -117,7 +117,7 @@
       ] ++ commonNative;
 
       buildInputs =
-        [ mctc-lib tblite multicharge dftd4 ]
+        [ mctc-lib tblite multicharge dftd4 pkgs.cpx ]
         ++ linalg;
 
       cmakeFlags = [
