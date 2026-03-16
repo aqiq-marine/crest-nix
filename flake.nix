@@ -113,7 +113,7 @@
         pkgs.ninja
         pkgs.pkg-config
         mctc-lib tblite multicharge
-        dftd4
+        dftd4 pkgs.cpx
       ] ++ commonNative;
 
       buildInputs =
