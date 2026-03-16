@@ -107,6 +107,7 @@
 
       nativeBuildInputs = [
         pkgs.meson
+        pkgs.ninja
         pkgs.pkg-config
         openmp
         mctc-lib
