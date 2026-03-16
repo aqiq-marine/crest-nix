@@ -116,7 +116,7 @@
         dftd4
         s-dftd3
         multicharge
-      ] ++ commonNative;
+      ] ++ linalg ++ commonNative;
 
       buildInputs = [
         openmp
