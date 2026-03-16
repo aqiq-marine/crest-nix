@@ -113,16 +113,19 @@
         pkgs.ninja
         pkgs.pkg-config
         mctc-lib tblite multicharge
-        dftd4 pkgs.cpx
+        dftd4
       ] ++ commonNative;
 
       buildInputs =
-        [ mctc-lib tblite multicharge dftd4 pkgs.cpx ]
+        [ mctc-lib tblite multicharge dftd4 ]
         ++ linalg;
 
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
         "-DFETCHCONTENT_FULLY_DISCONNECTED=ON"
+      ];
+      mesonFlags = [
+        "-Dcpcmx=disabled"
       ];
 
       installPhase = ''
