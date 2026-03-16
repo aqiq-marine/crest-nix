@@ -108,7 +108,9 @@
         sha256 = "sha256-+qgXSMwzD0xSycZIRTokt77fZHHZQ++Npzr7NLlypOA=";
       };
 
-      nativeBuildInputs = commonNative;
+      nativeBuildInputs = [
+        mctc-lib tblite multicharge
+      ] ++ commonNative;
 
       buildInputs =
         [ mctc-lib tblite multicharge ]
