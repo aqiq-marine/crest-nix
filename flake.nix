@@ -94,51 +94,8 @@
       '';
     };
 
-    tblite = pkgs.stdenv.mkDerivation {
-      pname = "tblite";
-      version = "0.3.0";
+    tblite = pkgs.tblite
 
-      src = pkgs.fetchFromGitHub {
-        owner = "tblite";
-        repo = "tblite";
-        rev = "v0.3.0";
-        sha256 = "sha256-R7CAFG/x55k5Ieslxeq+DWq1wPip4cI+Yvn1cBbeVNs=";
-      };
-
-      nativeBuildInputs = [
-        pkgs.meson
-        pkgs.ninja
-        pkgs.pkg-config
-        openmp
-        mctc-lib
-        mstore
-        toml-f
-        dftd4
-        s-dftd3
-        multicharge
-      ] ++ linalg ++ commonNative;
-
-      buildInputs = [
-        openmp
-        mctc-lib
-        mstore
-        toml-f
-        dftd4
-        s-dftd3
-        multicharge
-      ] ++ linalg;
-
-      NIX_FFLAGS_COMPILE = "-I${toml-f}/include";
-
-      cmakeFlags = [
-        "-DFETCHCONTENT_FULLY_DISCONNECTED=ON"
-        "-DCMAKE_BUILD_TYPE=Release"
-      ];
-
-      postInstall = ''
-        rm -f $out/lib/pkgconfig/*.pc
-      '';
-    };
 
     xtb = pkgs.stdenv.mkDerivation {
       pname = "xtb";
