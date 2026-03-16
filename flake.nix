@@ -109,6 +109,9 @@
       };
 
       nativeBuildInputs = [
+        pkgs.meson
+        pkgs.ninja
+        pkgs.pkg-config
         mctc-lib tblite multicharge
       ] ++ commonNative;
 
