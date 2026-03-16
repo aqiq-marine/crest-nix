@@ -113,10 +113,11 @@
         pkgs.ninja
         pkgs.pkg-config
         mctc-lib tblite multicharge
+        dft4d
       ] ++ commonNative;
 
       buildInputs =
-        [ mctc-lib tblite multicharge ]
+        [ mctc-lib tblite multicharge dft4d ]
         ++ linalg;
 
       cmakeFlags = [
