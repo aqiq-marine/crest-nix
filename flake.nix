@@ -106,6 +106,7 @@
       };
 
       nativeBuildInputs = [
+        pkgs.meson
         pkgs.pkg-config
         openmp
         mctc-lib
