@@ -25,6 +25,7 @@
         rev = "v${version}";
         # sha256 = "sha256-QRghnzsLGuQ5MHoVVTDg6ACtwVIkIRexNx/zrrQ0Icc=";
         # 0.2.4
+        sha256 = "sha256-gt9phDu+1NIZ2tOTopf0NSYpwXUaRYHDcPnBEdy1jns=";
         # 0.3.0
         # sha256 = "sha256-zrmY+nyZ+jEWmhGL1adsMMzg6tbdj0orcns1AIIpf7w=";
         # 0.3.1
