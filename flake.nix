@@ -24,7 +24,9 @@
         repo = "toml-f";
         rev = "v${version}";
         # sha256 = "sha256-QRghnzsLGuQ5MHoVVTDg6ACtwVIkIRexNx/zrrQ0Icc=";
-        sha256 = pkgs.lib.fakeSha256;
+        # 0.3.1
+        sha256 = "sha256-8FbnUkeJUP4fiuJCroAVDo6U2M7ZkFLpG2OYrapMYtU=";
+        # sha256 = pkgs.lib.fakeSha256;
       };
 
       nativeBuildInputs = [
