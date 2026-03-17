@@ -130,8 +130,8 @@
         owner = "tblite";
         repo = "tblite";
         rev = "v${version}";
-        # sha256 = "sha256-R7CAFG/x55k5Ieslxeq+DWq1wPip4cI+Yvn1cBbeVNs=";
-        sha256 = pkgs.lib.fakeSha256;
+        sha256 = "sha256-KV2fxB+SF4LilN/87YCvxUt4wsY4YyIV4tqnn+3/0oI=";
+        # sha256 = pkgs.lib.fakeSha256;
       };
 
       nativeBuildInputs = [
