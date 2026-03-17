@@ -113,7 +113,7 @@
         pkgs.gfortran
         pkgs.pkg-config
         pkgs.meson
-      ]
+      ];
 
       buildInputs = [
         mctc-lib
