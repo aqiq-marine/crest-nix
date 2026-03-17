@@ -98,7 +98,7 @@
 
     # tblite = oldpkgs.tblite;
 
-    tblite = pkgs.stdenv.mkDerivation {
+    tblite = pkgs.stdenv.mkDerivation rec {
       pname = "tblite";
       version = "0.5.0";
 
