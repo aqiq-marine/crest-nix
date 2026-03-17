@@ -102,7 +102,7 @@
         owner = "tblite";
         repo = "tblite";
         rev = "v${version}";
-        hash = pkgs.lib.fakeHash;
+        hash = "sha256-R7CAFG/x55k5Ieslxeq+DWq1wPip4cI+Yvn1cBbeVNs=";
       };
 
 
