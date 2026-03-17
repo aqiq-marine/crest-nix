@@ -19,7 +19,8 @@ jobs:
         uses: DeterminateSystems/magic-nix-cache-action@main
 
       - name: Build flake
-        run: nix build .#default
+        run: |
+          nix build .#default --print-build-logs --show-trace -L
 
       - name: Run binary
         run: |
