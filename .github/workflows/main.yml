@@ -25,7 +25,9 @@ jobs:
       - name: Show logs
         if: failure()
         run: |
-          nix log $(nix build .#default --no-link --print-out-paths 2>/dev/null || true)
+          drv=$(ls /nix/store/*xtb-*.drv | head -n1)
+          echo "log for $drv"
+          nix log "$drv"
 
       - name: Run binary
         run: |
