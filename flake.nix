@@ -17,14 +17,14 @@
     openmp = pkgs.mpi;
     toml-f = pkgs.stdenv.mkDerivation rec {
       pname = "toml-f";
-      version = "0.4.3";
+      version = "0.3.1";
 
       src = pkgs.fetchFromGitHub {
         owner = "toml-f";
         repo = "toml-f";
         rev = "v${version}";
-        sha256 = "sha256-QRghnzsLGuQ5MHoVVTDg6ACtwVIkIRexNx/zrrQ0Icc=";
-        # sha256 = pkgs.lib.fakeSha256;
+        # sha256 = "sha256-QRghnzsLGuQ5MHoVVTDg6ACtwVIkIRexNx/zrrQ0Icc=";
+        sha256 = pkgs.lib.fakeSha256;
       };
 
       nativeBuildInputs = [
@@ -124,14 +124,14 @@
 
     tblite = pkgs.stdenv.mkDerivation rec {
       pname = "tblite";
-      version = "0.4.0";
+      version = "0.3.0";
 
       src = pkgs.fetchFromGitHub {
         owner = "tblite";
         repo = "tblite";
         rev = "v${version}";
-        sha256 = "sha256-KV2fxB+SF4LilN/87YCvxUt4wsY4YyIV4tqnn+3/0oI=";
-        # sha256 = pkgs.lib.fakeSha256;
+        # sha256 = "sha256-KV2fxB+SF4LilN/87YCvxUt4wsY4YyIV4tqnn+3/0oI=";
+        sha256 = pkgs.lib.fakeSha256;
       };
 
       nativeBuildInputs = [
