@@ -23,8 +23,8 @@
         owner = "toml-f";
         repo = "toml-f";
         rev = "v${version}";
-        # sha256 = "sha256-gt9phDu+1NIZ2tOTopf0NSYpwXUaRYHDcPnBEdy1jns=";
-        sha256 = pkgs.lib.fakeSha256;
+        sha256 = "sha256-QRghnzsLGuQ5MHoVVTDg6ACtwVIkIRexNx/zrrQ0Icc=";
+        # sha256 = pkgs.lib.fakeSha256;
       };
 
       nativeBuildInputs = [
