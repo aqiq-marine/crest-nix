@@ -11,7 +11,8 @@
   let
     pkgs = import nixpkgs { inherit system; };
 
-    commonNative = with pkgs; [ cmake gfortran ];
+    commonNative = with pkgs; [ cmake gfortran13 ];
+    gfortran = pkgs.gfortran13;
 
     linalg = with pkgs; [ openblas lapack ];
     openmp = pkgs.mpi;
@@ -34,7 +35,7 @@
       };
 
       nativeBuildInputs = [
-        pkgs.gfortran
+        gfortran
         pkgs.pkg-config
         pkgs.meson
         pkgs.ninja
@@ -143,7 +144,7 @@
       };
 
       nativeBuildInputs = [
-        pkgs.gfortran
+        gfortran
         pkgs.pkg-config
         pkgs.meson
         pkgs.ninja
