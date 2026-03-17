@@ -125,11 +125,6 @@
         ninja -j1
       '';
 
-      installPhase = ''
-        mkdir -p $out/bin
-        cp xtb $out/bin/
-      '';
-
       postInstall = ''
         rm -f $out/lib/pkgconfig/*.pc
       '';
