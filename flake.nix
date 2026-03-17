@@ -3,15 +3,13 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    oldnixpkgs.url = "github:NixOS/nixpkgs/4f0dadb";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, oldnixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils }:
   flake-utils.lib.eachDefaultSystem (system:
   let
     pkgs = import nixpkgs { inherit system; };
-    oldpkgs = import oldnixpkgs { inherit system; };
 
     commonNative = with pkgs; [ cmake gfortran ];
 
@@ -25,8 +23,8 @@
         owner = "toml-f";
         repo = "toml-f";
         rev = "v${version}";
-        # sha256 = "sha256-8FbnUkeJUP4fiuJCroAVDo6U2M7ZkFLpG2OYrapMYtU=";
-        sha256 = pkgs.lib.fakeSha256;
+        sha256 = "sha256-gt9phDu+1NIZ2tOTopf0NSYpwXUaRYHDcPnBEdy1jns=";
+        # sha256 = pkgs.lib.fakeSha256;
       };
 
       nativeBuildInputs = [
