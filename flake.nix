@@ -102,7 +102,7 @@
       pname = "tblite";
       version = "0.5.0";
 
-      src = fetchFromGitHub {
+      src = pkgs.fetchFromGitHub {
         owner = "tblite";
         repo = "tblite";
         rev = "v${version}";
@@ -113,6 +113,7 @@
         pkgs.gfortran
         pkgs.pkg-config
         pkgs.meson
+        pkgs.ninja
       ];
 
       buildInputs = [
