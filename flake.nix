@@ -121,9 +121,9 @@
         s-dftd3
       ] ++ linalg;
 
-      buildPhase = ''
-        ninja -j1
-      '';
+      mesonFlags = [
+        "-Dpython=false"
+      ];
 
       postInstall = ''
         rm -f $out/lib/pkgconfig/*.pc
