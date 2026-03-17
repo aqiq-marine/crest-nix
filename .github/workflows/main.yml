@@ -22,7 +22,7 @@ jobs:
         run: |
           nix build .#default
 
-      -- name: Show logs
+      - name: Show logs
         if: failure()
         run: |
           nix log $(nix build .#default --no-link --print-out-paths 2>/dev/null || true)
