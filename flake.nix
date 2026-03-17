@@ -124,13 +124,14 @@
 
     tblite = pkgs.stdenv.mkDerivation rec {
       pname = "tblite";
-      version = "0.3.0";
+      version = "0.4.0";
 
       src = pkgs.fetchFromGitHub {
         owner = "tblite";
         repo = "tblite";
         rev = "v${version}";
-        sha256 = "sha256-R7CAFG/x55k5Ieslxeq+DWq1wPip4cI+Yvn1cBbeVNs=";
+        # sha256 = "sha256-R7CAFG/x55k5Ieslxeq+DWq1wPip4cI+Yvn1cBbeVNs=";
+        sha256 = pkgs.lib.fakeSha256;
       };
 
       nativeBuildInputs = [
