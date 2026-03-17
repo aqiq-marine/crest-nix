@@ -110,8 +110,7 @@
         pkgs.meson
         pkgs.ninja
         pkgs.pkg-config
-        gfortran
-      ];
+      ] + commonNative;
 
       buildInputs = [
         mctc-lib
