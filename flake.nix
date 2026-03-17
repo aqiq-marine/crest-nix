@@ -94,7 +94,47 @@
       '';
     };
 
-    tblite = pkgs.tblite;
+    tblite = stdenv.mkDerivation {
+      pname = "tblite";
+      version = "0.4.0";
+
+      src = fetchFromGitHub {
+        owner = "tblite";
+        repo = "tblite";
+        rev = "v${version}";
+        hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+      };
+
+
+      nativeBuildInputs = [
+        pkgs.meson
+        pkgs.ninja
+        pkgs.pkg-config
+        gfortran
+      ];
+
+      buildInputs = [
+        mctc-lib
+        mstore
+        toml-f
+        multicharge
+        dftd4
+        simple-dftd3
+      ] ++ linalg;
+
+      buildPhase = ''
+        ninja -j1
+      '';
+
+      installPhase = ''
+        mkdir -p $out/bin
+        cp xtb $out/bin/
+      '';
+
+      postInstall = ''
+        rm -f $out/lib/pkgconfig/*.pc
+      '';
+    };
 
 
     xtb = pkgs.stdenv.mkDerivation {
