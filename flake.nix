@@ -96,7 +96,38 @@
       '';
     };
 
-    tblite = oldpkgs.tblite;
+    # tblite = oldpkgs.tblite;
+
+    tblite = pkgs.stdenv.mkDerivation {
+      pname = "tblite";
+      version = "0.5.0";
+
+      src = fetchFromGitHub {
+        owner = "tblite";
+        repo = "tblite";
+        rev = "v${version}";
+        hash = "sha256-hePy/slEeM2o1gtrAbq/nkEUILa6oQjkD2ddDstQ2Zc=";
+      };
+
+      nativeBuildInputs = [
+        pkgs.gfortran
+        pkgs.pkg-config
+        pkgs.meson
+      ]
+
+      buildInputs = [
+        mctc-lib
+        mstore
+        toml-f
+        multicharge
+        dftd4
+        s-dftd3
+      ] ++ linalg;
+
+      buildPhase = ''
+        ninja -j1
+      '';
+    };
 
 
     xtb = pkgs.stdenv.mkDerivation {
