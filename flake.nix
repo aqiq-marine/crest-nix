@@ -118,7 +118,7 @@
         toml-f
         multicharge
         dftd4
-        simple-dftd3
+        s-dftd3
       ] ++ linalg;
 
       buildPhase = ''
