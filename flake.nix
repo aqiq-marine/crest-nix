@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    oldnixpkgs.url = "github:NixOS/nixpkgs/4f0dadb"
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -10,6 +11,7 @@
   flake-utils.lib.eachDefaultSystem (system:
   let
     pkgs = import nixpkgs { inherit system; };
+    oldpkgs = import oldnixpkgs { inherit system; };
 
     commonNative = with pkgs; [ cmake gfortran ];
 
@@ -94,38 +96,7 @@
       '';
     };
 
-    tblite = pkgs.stdenv.mkDerivation rec {
-      pname = "tblite";
-      version = "0.3.0";
-
-      src = pkgs.fetchFromGitHub {
-        owner = "tblite";
-        repo = "tblite";
-        rev = "v${version}";
-        hash = "sha256-R7CAFG/x55k5Ieslxeq+DWq1wPip4cI+Yvn1cBbeVNs=";
-      };
-
-
-      nativeBuildInputs = [
-        pkgs.meson
-        pkgs.ninja
-        pkgs.pkg-config
-      ] ++ commonNative;
-
-      buildInputs = [
-        mctc-lib
-        mstore
-        toml-f
-        multicharge
-        dftd4
-        s-dftd3
-      ] ++ linalg;
-
-      mesonFlags = [
-        "-Dpython=false"
-      ];
-
-    };
+    tblite = oldpkgs.tblite;
 
 
     xtb = pkgs.stdenv.mkDerivation {
