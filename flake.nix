@@ -128,6 +128,10 @@
         "-Dcpcmx=disabled"
       ];
 
+      buildPhase = ''
+        ninja -j1
+      '';
+
       installPhase = ''
         mkdir -p $out/bin
         cp xtb $out/bin/
