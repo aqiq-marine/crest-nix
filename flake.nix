@@ -125,9 +125,6 @@
         "-Dpython=false"
       ];
 
-      postInstall = ''
-        rm -f $out/lib/pkgconfig/*.pc
-      '';
     };
 
 
