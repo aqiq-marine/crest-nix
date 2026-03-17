@@ -102,7 +102,7 @@
         owner = "tblite";
         repo = "tblite";
         rev = "v${version}";
-        hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        hash = "sha256-KV2fxB+SF4LilN/87YCvxUt4wsY4YyIV4tqnn+3/0oI=";
       };
 
 
