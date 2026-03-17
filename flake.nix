@@ -94,7 +94,7 @@
       '';
     };
 
-    tblite = stdenv.mkDerivation {
+    tblite = pkgs.stdenv.mkDerivation {
       pname = "tblite";
       version = "0.4.0";
 
