@@ -17,7 +17,32 @@
 
     linalg = with pkgs; [ openblas lapack ];
     openmp = pkgs.mpi;
-    toml-f = pkgs.toml-f;
+    toml-f = pkgs.stdenv.mkDerivation rec {
+      pname = "toml-f";
+      version = "0.3.1";
+
+      src = pkgs.fetchFromGitHub {
+        owner = "toml-f";
+        repo = "toml-f";
+        rev = "v${version}";
+        sha256 = pkgs.lib.fakeSha256;
+      };
+
+      nativeBuildInputs = [
+        pkgs.gfortran
+        pkgs.pkg-config
+        pkgs.meson
+        pkgs.ninja
+      ];
+
+      buildInputs = [
+        pkgs.test-drive
+      ];
+
+      buildPhase = ''
+        ninja -j1
+      '';
+    };
     dftd4 = pkgs.dftd4;
     s-dftd3 = pkgs.simple-dftd3;
 
