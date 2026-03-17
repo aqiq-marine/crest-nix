@@ -19,13 +19,14 @@
     openmp = pkgs.mpi;
     toml-f = pkgs.stdenv.mkDerivation rec {
       pname = "toml-f";
-      version = "0.3.1";
+      version = "0.2.4";
 
       src = pkgs.fetchFromGitHub {
         owner = "toml-f";
         repo = "toml-f";
         rev = "v${version}";
-        sha256 = "sha256-8FbnUkeJUP4fiuJCroAVDo6U2M7ZkFLpG2OYrapMYtU=";
+        # sha256 = "sha256-8FbnUkeJUP4fiuJCroAVDo6U2M7ZkFLpG2OYrapMYtU=";
+        sha256 = pkgs.lib.fakeSha256;
       };
 
       nativeBuildInputs = [
