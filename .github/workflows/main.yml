@@ -20,7 +20,12 @@ jobs:
 
       - name: Build flake
         run: |
-          nix build .#default --print-build-logs --show-trace -L
+          nix build .#default
+
+      -- name: Show logs
+        if: failure()
+        run: |
+          nix log $(nix build .#default --no-link --print-out-paths 2>/dev/null || true)
 
       - name: Run binary
         run: |
