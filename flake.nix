@@ -50,7 +50,30 @@
       '';
     };
     dftd4 = pkgs.dftd4;
-    s-dftd3 = pkgs.simple-dftd3;
+    s-dftd3 = pkgs.stdenv.mkDerivation rec {
+      pname = "simple-dftd3";
+      version = "1.2.1";
+
+      src = fetchFromGitHub {
+        owner = "dftd3";
+        repo = "simple-dftd3";
+        tag = "v${version}";
+        hash = "sha256-c4xctcMcPQ70ippqbwtinygmnZ5en6ZGF5/v0ZWtzys=";
+      };
+
+      nativeBuildInputs = [
+        gfortran
+        pkgs.pkg-config
+        pkgs.meson
+        pkgs.ninja
+      ];
+
+      buildInputs = [
+        mctc-lib
+        mstore
+        toml-f
+      ] ++ linalg;
+    };
 
     mctc-lib = pkgs.stdenv.mkDerivation {
       pname = "mctc-lib";
