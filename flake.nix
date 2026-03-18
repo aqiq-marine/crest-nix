@@ -15,7 +15,7 @@
         (final: prev: {
           stdenv = prev.gcc13Stdenv;
         })
-      ]
+      ];
     };
 
     commonNative = with pkgs; [ cmake gfortran13 ];
