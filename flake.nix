@@ -54,7 +54,7 @@
       pname = "simple-dftd3";
       version = "1.2.1";
 
-      src = fetchFromGitHub {
+      src = pkgs.fetchFromGitHub {
         owner = "dftd3";
         repo = "simple-dftd3";
         tag = "v${version}";
