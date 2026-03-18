@@ -9,7 +9,14 @@
   outputs = { self, nixpkgs, flake-utils }:
   flake-utils.lib.eachDefaultSystem (system:
   let
-    pkgs = import nixpkgs { inherit system; };
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [
+        (final: prev: {
+          stdenv = prev.gcc13Stdenv;
+        })
+      ]
+    };
 
     commonNative = with pkgs; [ cmake gfortran13 ];
     gfortran = pkgs.gfortran13;
