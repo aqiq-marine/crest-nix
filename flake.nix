@@ -66,7 +66,7 @@
         pkgs.pkg-config
         pkgs.meson
         pkgs.ninja
-      ];
+      ] ++ commonNative;
 
       buildInputs = [
         mctc-lib
