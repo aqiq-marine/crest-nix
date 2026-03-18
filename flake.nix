@@ -9,21 +9,15 @@
   outputs = { self, nixpkgs, flake-utils }:
   flake-utils.lib.eachDefaultSystem (system:
   let
-    pkgs = import nixpkgs {
-      inherit system;
-      overlays = [
-        (final: prev: {
-          stdenv = prev.gcc13Stdenv;
-        })
-      ];
-    };
+    pkgs = import nixpkgs { inherit system; };
+    stdenv = pkgs.gcc13Stdenv;
 
     commonNative = with pkgs; [ cmake gfortran13 ];
     gfortran = pkgs.gfortran13;
 
     linalg = with pkgs; [ openblas lapack ];
     openmp = pkgs.mpi;
-    toml-f = pkgs.stdenv.mkDerivation rec {
+    toml-f = stdenv.mkDerivation rec {
       pname = "toml-f";
       version = "0.2.4";
 
@@ -57,7 +51,7 @@
       '';
     };
     dftd4 = pkgs.dftd4;
-    s-dftd3 = pkgs.stdenv.mkDerivation rec {
+    s-dftd3 = stdenv.mkDerivation rec {
       pname = "simple-dftd3";
       version = "1.2.1";
 
@@ -82,7 +76,7 @@
       ] ++ linalg;
     };
 
-    mctc-lib = pkgs.stdenv.mkDerivation {
+    mctc-lib = stdenv.mkDerivation {
       pname = "mctc-lib";
       version = "0.3.1";
 
@@ -104,7 +98,7 @@
       '';
     };
 
-    mstore = pkgs.stdenv.mkDerivation {
+    mstore = stdenv.mkDerivation {
       pname = "mstore";
       version = "0.3.0";
     
@@ -130,7 +124,7 @@
       '';
     };
 
-    multicharge = pkgs.stdenv.mkDerivation {
+    multicharge = stdenv.mkDerivation {
       pname = "multicharge";
       version = "0.3.0";
 
@@ -159,7 +153,7 @@
 
     # tblite = oldpkgs.tblite;
 
-    tblite = pkgs.stdenv.mkDerivation rec {
+    tblite = stdenv.mkDerivation rec {
       pname = "tblite";
       version = "0.3.0";
 
@@ -195,7 +189,7 @@
     };
 
 
-    xtb = pkgs.stdenv.mkDerivation {
+    xtb = stdenv.mkDerivation {
       pname = "xtb";
       version = "6.7.1";
 
@@ -240,7 +234,7 @@
       '';
     };
 
-    crest = pkgs.stdenv.mkDerivation {
+    crest = stdenv.mkDerivation {
       pname = "crest";
       version = "3.0.2";
 
