@@ -69,7 +69,7 @@
 
       preBuild = ''
         echo "PATH=$PATH"
-      ''
+      '';
 
       nativeBuildInputs = [
         gfortran
