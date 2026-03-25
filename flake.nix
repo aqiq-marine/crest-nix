@@ -70,6 +70,7 @@
       preInstall = ''
         export PATH=${pkgs.python3}/bin:$PATH
         echo "PATH=$PATH"
+        echo "which python = $(which python)"
       '';
 
       nativeBuildInputs = [
