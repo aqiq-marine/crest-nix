@@ -67,10 +67,10 @@
         # sha256 = pkgs.lib.fakeSha256;
       };
 
-      # preBuild = ''
-      #   export PATH=${pkgs.python310}/bin:$PATH
-      #   echo "PATH=$PATH"
-      # '';
+      preInstall = ''
+        export PATH=${pkgs.python3}/bin:$PATH
+        echo "PATH=$PATH"
+      '';
 
       nativeBuildInputs = [
         gfortran
