@@ -71,6 +71,10 @@
         echo "pre install"
         echo "print('hello nix python!')" | /usr/bin/env python
       '';
+      postPatch = ''
+        substituteInPlace config/install-mod.py \
+          --replace "/usr/bin/env python" "${pkgs.python3}/bin/python3"
+      '';
 
       nativeBuildInputs = [
         gfortran
