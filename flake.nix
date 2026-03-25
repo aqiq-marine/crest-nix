@@ -72,6 +72,7 @@
         pkgs.pkg-config
         pkgs.meson
         pkgs.ninja
+        pkgs.python310
       ] ++ commonNative;
 
       buildInputs = [
