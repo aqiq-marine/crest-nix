@@ -68,9 +68,8 @@
       };
 
       preInstall = ''
-        export PATH=${pkgs.python3}/bin:$PATH
-        echo "PATH=$PATH"
-        echo "print('hello nix python!')" | python
+        echo "pre install"
+        echo "print('hello nix python!')" | /usr/bin/env python
       '';
 
       nativeBuildInputs = [
