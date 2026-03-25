@@ -10,10 +10,10 @@
   flake-utils.lib.eachDefaultSystem (system:
   let
     pkgs = import nixpkgs { inherit system; };
-    stdenv = pkgs.gcc13Stdenv;
+    stdenv = pkgs.gcc14Stdenv;
 
-    commonNative = with pkgs; [ cmake ];
-    gfortran = pkgs.gfortran13;
+    commonNative = with pkgs; [ cmake gfortran14 ];
+    gfortran = pkgs.gfortran14;
 
     linalg = with pkgs; [ openblas lapack ];
     openmp = pkgs.mpi;
@@ -38,7 +38,7 @@
       };
 
       nativeBuildInputs = [
-        # gfortran
+        gfortran
         pkgs.pkg-config
         pkgs.meson
         pkgs.ninja
@@ -73,7 +73,7 @@
       '';
 
       nativeBuildInputs = [
-        # gfortran
+        gfortran
         pkgs.pkg-config
         pkgs.meson
         pkgs.ninja
@@ -179,7 +179,7 @@
       };
 
       nativeBuildInputs = [
-        # gfortran
+        gfortran
         pkgs.pkg-config
         pkgs.meson
         pkgs.ninja
