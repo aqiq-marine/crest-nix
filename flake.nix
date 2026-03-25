@@ -67,6 +67,10 @@
         # sha256 = pkgs.lib.fakeSha256;
       };
 
+      preBuild = ''
+        echo "PATH=$PATH"
+      ''
+
       nativeBuildInputs = [
         gfortran
         pkgs.pkg-config
