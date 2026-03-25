@@ -19,7 +19,7 @@
     openmp = pkgs.mpi;
     toml-f = stdenv.mkDerivation rec {
       pname = "toml-f";
-      version = "0.2.4";
+      version = "0.4.2";
 
       src = pkgs.fetchFromGitHub {
         owner = "toml-f";
@@ -27,12 +27,12 @@
         rev = "v${version}";
         # sha256 = "sha256-QRghnzsLGuQ5MHoVVTDg6ACtwVIkIRexNx/zrrQ0Icc=";
         # 0.2.4
-        sha256 = "sha256-gt9phDu+1NIZ2tOTopf0NSYpwXUaRYHDcPnBEdy1jns=";
+        # sha256 = "sha256-gt9phDu+1NIZ2tOTopf0NSYpwXUaRYHDcPnBEdy1jns=";
         # 0.3.0
         # sha256 = "sha256-zrmY+nyZ+jEWmhGL1adsMMzg6tbdj0orcns1AIIpf7w=";
         # 0.3.1
         # sha256 = "sha256-8FbnUkeJUP4fiuJCroAVDo6U2M7ZkFLpG2OYrapMYtU=";
-        # sha256 = pkgs.lib.fakeSha256;
+        sha256 = pkgs.lib.fakeSha256;
       };
 
       nativeBuildInputs = [
@@ -53,13 +53,14 @@
     dftd4 = pkgs.dftd4;
     s-dftd3 = stdenv.mkDerivation rec {
       pname = "simple-dftd3";
-      version = "1.2.1";
+      version = "0.6.0";
 
       src = pkgs.fetchFromGitHub {
         owner = "dftd3";
         repo = "simple-dftd3";
         tag = "v${version}";
-        hash = "sha256-c4xctcMcPQ70ippqbwtinygmnZ5en6ZGF5/v0ZWtzys=";
+        # hash = "sha256-c4xctcMcPQ70ippqbwtinygmnZ5en6ZGF5/v0ZWtzys=";
+        sha256 = pkgs.lib.fakeSha256;
       };
 
       nativeBuildInputs = [
@@ -126,12 +127,12 @@
 
     multicharge = stdenv.mkDerivation {
       pname = "multicharge";
-      version = "0.3.0";
+      version = "0.2.0";
 
       src = pkgs.fetchFromGitHub {
         owner = "grimme-lab";
         repo = "multicharge";
-        rev = "v0.3.0";
+        rev = "v0.2.0";
         sha256 = "sha256-W6IqCz9k6kdPxnIIA+eMCrFjf0ELTeK78VvZoyFcZxU=";
       };
 
