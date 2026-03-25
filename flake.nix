@@ -32,7 +32,9 @@
         # sha256 = "sha256-zrmY+nyZ+jEWmhGL1adsMMzg6tbdj0orcns1AIIpf7w=";
         # 0.3.1
         # sha256 = "sha256-8FbnUkeJUP4fiuJCroAVDo6U2M7ZkFLpG2OYrapMYtU=";
-        sha256 = pkgs.lib.fakeSha256;
+        # 0.4.2
+        sha256 = "sha256-+cac4rUNpd2w3yBdH1XoCKdJ9IgOHZioZg8AhzGY0FE=";
+        # sha256 = pkgs.lib.fakeSha256;
       };
 
       nativeBuildInputs = [
