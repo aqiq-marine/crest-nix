@@ -68,6 +68,7 @@
       };
 
       preBuild = ''
+        export PATH=${pkgs.python310}/bin:$PATH
         echo "PATH=$PATH"
       '';
 
