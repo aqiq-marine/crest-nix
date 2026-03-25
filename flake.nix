@@ -62,7 +62,9 @@
         repo = "simple-dftd3";
         tag = "v${version}";
         # hash = "sha256-c4xctcMcPQ70ippqbwtinygmnZ5en6ZGF5/v0ZWtzys=";
-        sha256 = pkgs.lib.fakeSha256;
+        # 0.6.0
+        sha256 = "sha256-dvLePK6CaE2fd3GjRTBK5SSgf71DKNWh5dk+bw05NKU=";
+        # sha256 = pkgs.lib.fakeSha256;
       };
 
       nativeBuildInputs = [
