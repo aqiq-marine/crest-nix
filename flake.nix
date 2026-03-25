@@ -67,17 +67,17 @@
         # sha256 = pkgs.lib.fakeSha256;
       };
 
-      preBuild = ''
-        export PATH=${pkgs.python310}/bin:$PATH
-        echo "PATH=$PATH"
-      '';
+      # preBuild = ''
+      #   export PATH=${pkgs.python310}/bin:$PATH
+      #   echo "PATH=$PATH"
+      # '';
 
       nativeBuildInputs = [
         gfortran
         pkgs.pkg-config
         pkgs.meson
         pkgs.ninja
-        pkgs.python310
+        pkgs.python3
       ] ++ commonNative;
 
       buildInputs = [
