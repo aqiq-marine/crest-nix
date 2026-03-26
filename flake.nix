@@ -69,7 +69,7 @@
 
       prePatch = ''
         echo "-- MyPrePatch --------"
-        gfortran --version
+        command -v gfortran || true
         gfortran -print-file-name=f951
         echo "-- end of MyPrePatch -----"
 
@@ -185,7 +185,7 @@
 
       prePatch = ''
         echo "-- MyPrePatch --------"
-        gfortran --version
+        command -v gfortran || true
         gfortran -print-file-name=f951
         echo "-- end of MyPrePatch -----"
       '';
