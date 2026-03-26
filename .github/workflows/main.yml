@@ -20,7 +20,7 @@ jobs:
 
       - name: Build flake
         run: |
-          nix build .#default --show-trace
+          nix build .#default --no-substitute --show-trace
 
       - name: Show logs
         if: failure()
