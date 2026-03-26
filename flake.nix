@@ -10,7 +10,7 @@
   flake-utils.lib.eachDefaultSystem (system:
   let
     pkgs = import nixpkgs { inherit system; };
-    stdenv = pkgs.gcc14Stdenv;
+    stdenv = pkgs.stdenvNoLibs;
 
     commonNative = with pkgs; [ cmake gfortran14 ];
     gfortran = pkgs.gfortran14;
