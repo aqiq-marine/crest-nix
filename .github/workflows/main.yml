@@ -25,6 +25,10 @@ jobs:
       - name: Show logs
         if: failure()
         run: |
+          drv=$(ls /nix/store/*simple-dftd3-*.drv | head -n1)
+          echo "log for s-dftd3 $drv"
+          nix log "$drv"
+
           drv=$(ls /nix/store/*tblite-*.drv | head -n1)
           echo "log for $drv"
           nix log "$drv"
