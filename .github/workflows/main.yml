@@ -31,6 +31,12 @@ jobs:
           drv2=$(ls /nix/store/*tblite-*.drv | head -n1)
           echo "-- log for tblite $drv2 -------------------------------"
           nix log "$drv2"
+          echo "=== file info ==="
+          file /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod || true
+          echo "=== size ==="
+          ls -lh /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod || true
+          echo "=== hexdump ==="
+          head -c 64 /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod | hexdump -C || true
 
       - name: Run binary
         run: |
