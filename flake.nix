@@ -78,10 +78,6 @@
           --replace "/usr/bin/env python" "${pkgs.python3}/bin/python3"
       '';
 
-      postInstall = ''
-        find $out -name "*.mod" -delete
-      '';
-
       nativeBuildInputs = [
         gfortran
         pkgs.pkg-config
