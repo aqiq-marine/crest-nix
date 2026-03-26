@@ -72,6 +72,10 @@
           --replace "/usr/bin/env python" "${pkgs.python3}/bin/python3"
       '';
 
+      postInstall = ''
+        find $out -name "*.mod" -delete
+      '';
+
       nativeBuildInputs = [
         gfortran
         pkgs.pkg-config
@@ -177,6 +181,12 @@
         sha256 = "sha256-R7CAFG/x55k5Ieslxeq+DWq1wPip4cI+Yvn1cBbeVNs=";
         # sha256 = pkgs.lib.fakeSha256;
       };
+
+      preInstall = ''
+        echo "preInstall"
+        gfortran -v
+        gfortran -print-prog-name=f951
+      ''
 
       nativeBuildInputs = [
         gfortran
