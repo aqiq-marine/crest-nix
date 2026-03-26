@@ -67,13 +67,12 @@
         # sha256 = pkgs.lib.fakeSha256;
       };
 
-      preBuild = ''
+
+      postPatch = ''
         echo "preBuild"
         gfortran -v
         gfortran -print-prog-name=f951
-      '';
 
-      postPatch = ''
         substituteInPlace config/install-mod.py \
           --replace "/usr/bin/env python" "${pkgs.python3}/bin/python3"
       '';
@@ -184,7 +183,7 @@
         # sha256 = pkgs.lib.fakeSha256;
       };
 
-      preBuild = ''
+      postPatch = ''
         echo "preBuild"
         gfortran -v
         gfortran -print-prog-name=f951
