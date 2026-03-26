@@ -78,7 +78,15 @@
       '';
 
       postInstall = ''
-        find $out/include -name "*.mod" -exec gzip -d {} \;
+        find $out -name "*.mod" -exec sh -c '
+          for f; do
+            if file "$f" | grep -q gzip; then
+              echo "decompressing $f"
+              mv "$f" "$f.gz"
+              gzip -d "$f.gz"
+            fi
+          done
+        ' sh {} +
       '';
 
       nativeBuildInputs = [
