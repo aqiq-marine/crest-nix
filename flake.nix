@@ -186,7 +186,7 @@
         echo "preInstall"
         gfortran -v
         gfortran -print-prog-name=f951
-      ''
+      '';
 
       nativeBuildInputs = [
         gfortran
