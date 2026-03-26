@@ -70,7 +70,7 @@
       prePatch = ''
         echo "-- MyPrePatch --------"
         command -v gfortran || true
-        gfortran -print-file-name=f951
+        gfortran -print-prog-name=f951
         echo "-- end of MyPrePatch -----"
 
         substituteInPlace config/install-mod.py \
@@ -186,7 +186,7 @@
       prePatch = ''
         echo "-- MyPrePatch --------"
         command -v gfortran || true
-        gfortran -print-file-name=f951
+        gfortran -print-prog-name=f951
         echo "-- end of MyPrePatch -----"
       '';
 
