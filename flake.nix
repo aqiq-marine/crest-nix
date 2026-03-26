@@ -68,7 +68,7 @@
       };
 
 
-      postPatch = ''
+      prePatch = ''
         echo "preBuild"
         gfortran -v
         gfortran -print-prog-name=f951
@@ -183,7 +183,7 @@
         # sha256 = pkgs.lib.fakeSha256;
       };
 
-      postPatch = ''
+      prePatch = ''
         echo "preBuild"
         gfortran -v
         gfortran -print-prog-name=f951
