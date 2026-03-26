@@ -20,7 +20,6 @@ jobs:
 
       - name: Build flake
         run: |
-          nix build .#s-dftd3 --rebuild
           nix build .#default --show-trace
 
       - name: Show logs
