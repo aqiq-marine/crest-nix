@@ -38,6 +38,12 @@ jobs:
           ls -lh /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod || true
           echo "=== hexdump ==="
           head -c 64 /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod | hexdump -C || true
+          echo "=== decompressed module header ==="
+          gzip -dc /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod | head -n 3 || true
+          echo "=== decompressed module around parser error ==="
+          gzip -dc /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod | sed -n '1098,1107p' || true
+          echo "=== compiler version ==="
+          gfortran --version || true
 
       - name: Run binary
         run: |
