@@ -77,18 +77,6 @@
           --replace "/usr/bin/env python" "${pkgs.python3}/bin/python3"
       '';
 
-      postInstall = ''
-        find $out -name "*.mod" -exec sh -c '
-          for f; do
-            if file "$f" | grep -q gzip; then
-              echo "decompressing $f"
-              mv "$f" "$f.gz"
-              gzip -d "$f.gz"
-            fi
-          done
-        ' sh {} +
-      '';
-
       nativeBuildInputs = [
         gfortran
         pkgs.pkg-config
