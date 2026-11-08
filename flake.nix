@@ -92,27 +92,9 @@
       ] ++ linalg;
     };
 
-    mctc-lib = stdenv.mkDerivation {
-      pname = "mctc-lib";
-      version = "0.3.1";
-
-      src = pkgs.fetchFromGitHub {
-        owner = "grimme-lab";
-        repo = "mctc-lib";
-        rev = "v0.3.1";
-        sha256 = "sha256-AXjg/ZsitdDf9fNoGVmVal1iZ4/sxjJb7A9W4yye/rg=";
-      };
-
-      nativeBuildInputs = commonNative;
-
-      cmakeFlags = [
-        "-DCMAKE_BUILD_TYPE=Release"
-      ];
-
-      postInstall = ''
-        rm -f $out/lib/pkgconfig/*.pc
-      '';
-    };
+    # Match the mctc-lib version pulled in by nixpkgs' dftd4 (3.7.0).
+    # All Fortran consumers must use one compatible module interface.
+    mctc-lib = pkgs.mctc-lib;
 
     mstore = stdenv.mkDerivation {
       pname = "mstore";
