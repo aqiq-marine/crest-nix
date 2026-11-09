@@ -44,11 +44,11 @@
 
             # Propagate mctc-lib's generated Fortran module directory to
             # consumers such as the bundled tblite subproject.
-            if(TARGET "mctc-lib::mctc-lib" AND DEFINED MCTCLIB_BINARY_DIR)
+            if(TARGET "mctc-lib::mctc-lib" AND DEFINED MCTC-LIB_BINARY_DIR)
               target_include_directories(
                 "mctc-lib::mctc-lib"
                 INTERFACE
-                "''${MCTCLIB_BINARY_DIR}/include"
+                "''${MCTC-LIB_BINARY_DIR}/include"
               )
             endif()
             EOF
