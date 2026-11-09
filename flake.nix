@@ -94,7 +94,7 @@
 
     # Match the mctc-lib version pulled in by nixpkgs' dftd4 (3.7.0).
     # All Fortran consumers must use one compatible module interface.
-    mctc-lib = pkgs.mctc-lib;
+    mctc-lib = pkgs.mctc-lib.override { buildType = "cmake"; };
 
     mstore = stdenv.mkDerivation {
       pname = "mstore";
