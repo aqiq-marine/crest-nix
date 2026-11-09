@@ -52,8 +52,8 @@
 
             cat >> config/modules/Findtblite.cmake <<'EOF'
 
-            if(TARGET "tblite-lib" AND TARGET "mctc-lib-lib")
-              add_dependencies("tblite-lib" "mctc-lib-lib")
+            if(TARGET "tblite-lib" AND TARGET "mctc-lib")
+              add_dependencies("tblite-lib" "mctc-lib")
             endif()
             EOF
           '';
