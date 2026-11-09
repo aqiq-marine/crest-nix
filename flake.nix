@@ -48,7 +48,7 @@
               target_include_directories(
                 "mctc-lib::mctc-lib"
                 INTERFACE
-                "${MCTCLIB_BINARY_DIR}/include"
+                "''${MCTCLIB_BINARY_DIR}/include"
               )
             endif()
             EOF
