@@ -39,6 +39,7 @@
           cmakeBuildType = "Release";
 
           cmakeFlags = [
+            "-DFETCHCONTENT_FULLY_DISCONNECTED=ON"
             "-DWITH_TESTS=OFF"
             "-DWITH_OpenMP=ON"
             "-DWITH_TBLITE=ON"
