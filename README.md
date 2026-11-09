@@ -27,8 +27,15 @@ Do not replace these with independently selected "latest" versions of
 That can mix incompatible Fortran module interfaces.
 
 The build uses upstream CMake options, enables the bundled calculator
-backends, and disables the upstream unit-test targets for the initial
-packaging pass. BLAS/LAPACK is provided by OpenBLAS.
+backends, disables the upstream unit-test targets for the initial packaging
+pass, and prevents CMake from downloading dependencies during the build.
+BLAS/LAPACK is provided by OpenBLAS.
+
+This first pass packages CREST itself, not the separate `xtb` executable.
+Most CREST 3.x runtypes use the integrated calculator layer, but upstream
+notes that some workflows (including QCG and legacy mode) still require an
+external `xtb` executable. That will be packaged separately after the CREST
+build is stable.
 
 ## Initial source hash
 
