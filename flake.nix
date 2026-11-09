@@ -11,6 +11,13 @@
       let
         pkgs = import nixpkgs { inherit system; };
 
+        mctcLibSrc = pkgs.fetchFromGitHub {
+          owner = "grimme-lab";
+          repo = "mctc-lib";
+          rev = "v0.3.2";
+          hash = pkgs.lib.fakeHash;
+        };
+
         crest = pkgs.stdenv.mkDerivation {
           pname = "crest";
           version = "3.0.2";
@@ -34,13 +41,13 @@
 
           buildInputs = [
             pkgs.openblas
-            pkgs.mctc-lib.dev
           ];
 
           cmakeBuildType = "Release";
 
           cmakeFlags = [
             "-DFETCHCONTENT_FULLY_DISCONNECTED=ON"
+            "-DFETCHCONTENT_SOURCE_DIR_MCTC-LIB=${mctcLibSrc}"
             "-DWITH_TESTS=OFF"
             "-DWITH_OpenMP=ON"
             "-DWITH_TBLITE=ON"
