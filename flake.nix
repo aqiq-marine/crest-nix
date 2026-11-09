@@ -34,29 +34,8 @@
 
           buildInputs = [
             pkgs.openblas
+            pkgs.mctc-lib.dev
           ];
-
-          # Propagate mctc-lib's generated Fortran module directory and
-          # ensure its modules are built before tblite's Fortran sources.
-          postPatch = ''
-            cat >> config/modules/Findmctc-lib.cmake <<'EOF'
-
-            if(TARGET "mctc-lib::mctc-lib" AND DEFINED MCTC-LIB_BINARY_DIR)
-              target_include_directories(
-                "mctc-lib::mctc-lib"
-                INTERFACE
-                "''${MCTC-LIB_BINARY_DIR}/include"
-              )
-            endif()
-            EOF
-
-            cat >> config/modules/Findtblite.cmake <<'EOF'
-
-            if(TARGET "tblite-lib" AND TARGET "mctc-lib")
-              add_dependencies("tblite-lib" "mctc-lib")
-            endif()
-            EOF
-          '';
 
           cmakeBuildType = "Release";
 
