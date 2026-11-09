@@ -22,7 +22,7 @@
             repo = "crest";
             rev = "v3.0.2";
             fetchSubmodules = true;
-            hash = pkgs.lib.fakeHash;
+            hash = "sha256-YCqUwQc8Cr58YKxromGEnMp/MRmAe8NhNr6Lo2783Pk=";
           };
 
           nativeBuildInputs = [
