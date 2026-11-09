@@ -15,7 +15,7 @@
           owner = "grimme-lab";
           repo = "mctc-lib";
           rev = "v0.3.2";
-          hash = pkgs.lib.fakeHash;
+          hash = "sha256-dJYKnGlcc4N40h1RnP6MJyBj70/8kb1q4OyKTmlvS70=";
         };
 
         crest = pkgs.stdenv.mkDerivation {
