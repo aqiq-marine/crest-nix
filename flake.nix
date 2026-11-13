@@ -108,10 +108,17 @@
       dontFixup = true;
     };
 
+    dftd4Src = pkgs.fetchFromGitHub {
+      owner = "dftd4";
+      repo = "dftd4";
+      rev = "v3.4.0";
+      sha256 = pkgs.lib.fakeHash;
+    };
+
     dftd4 = stdenv.mkDerivation {
       pname = "dftd4";
-      version = "4.2.0";
-      src = pkgs.dftd4.src;
+      version = "3.4.0";
+      src = dftd4Src;
       nativeBuildInputs = commonNative;
       buildInputs = [ mctc-lib mstore multicharge toml-f ] ++ linalg;
       cmakeFlags = [
