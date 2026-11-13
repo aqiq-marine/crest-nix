@@ -54,7 +54,8 @@ jobs:
           f=$(find /nix/store/*tblite-0.3.0*/include -name 'tblite_wavefunction.mod' -print -quit)
           file "$f" || true
           ls -lh "$f" || true
-          gzip -dc "$f" | sed -n '130,145p' || true
+          gzip -dc "$f" | awk 'NR==139 { print substr($0,1,1000) }' || true
+          gzip -dc "$f" | wc -l || true
           echo "=== compiler version ==="
           gfortran --version || true
 
