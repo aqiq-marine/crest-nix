@@ -1,0 +1,56 @@
+name: nix-build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      # - name: Enable Nix cache
+      #   uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Lock flake inputs
+        run: |
+          nix flake lock
+          echo "=== generated flake.lock ==="
+          cat flake.lock
+
+      - name: Build flake
+        run: |
+          nix build .#default --show-trace
+
+      - name: Show logs
+        if: failure()
+        run: |
+          drv=$(ls /nix/store/*simple-dftd3-*.drv | head -n1)
+          echo "-- log for s-dftd3 $drv -------------------------"
+          nix log "$drv" || true
+          drv2=$(ls /nix/store/*tblite-*.drv | head -n1)
+          echo "-- log for tblite $drv2 -------------------------------"
+          nix log "$drv2" || true
+          echo "=== file info ==="
+          file /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod || true
+          echo "=== size ==="
+          ls -lh /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod || true
+          echo "=== hexdump ==="
+          head -c 64 /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod | hexdump -C || true
+          echo "=== decompressed module header ==="
+          gzip -dc /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod | head -n 3 || true
+          echo "=== decompressed module around parser error ==="
+          gzip -dc /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod | sed -n '1098,1107p' || true
+          echo "=== compiler version ==="
+          gfortran --version || true
+
+      - name: Run binary
+        run: |
+          ./result/bin/crest --help
