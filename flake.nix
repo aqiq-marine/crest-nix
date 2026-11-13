@@ -42,7 +42,7 @@
       owner = "pprcht";
       repo = "tblite";
       rev = "4556e28f391573b3c80c94beb7c56313005d5269";
-      sha256 = pkgs.lib.fakeHash;
+      sha256 = "sha256-JmTEnvYqA73vmWQe4cpjvp6/Wwb+elSMDdHTPwD3/jc=";
     };
 
     toml-f = stdenv.mkDerivation {
