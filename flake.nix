@@ -26,8 +26,8 @@
     gfnffSrc = pkgs.fetchFromGitHub {
       owner = "pprcht";
       repo = "gfnff";
-      rev = "925cd0ed156135b5ef227b6e6810e45cc2a6cd0a";
-      sha256 = "sha256-Vbeyxqyrtl7TWPd46v312H1oamIQmO29Vca/6KEsdMc=";
+      rev = "42963235cba66f81575f17b2dba8be7acf2a440d";
+      sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
     };
 
     lwoniomSrc = pkgs.fetchFromGitHub {
