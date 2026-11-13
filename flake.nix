@@ -221,18 +221,12 @@
         done
         mkdir -p $out/lib/cmake/gfnff
         cat << 'EOF' > $out/lib/cmake/gfnff/gfnffConfig.cmake
+        get_filename_component(PACKAGE_PREFIX_DIR "''${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
         include("''${CMAKE_CURRENT_LIST_DIR}/gfnff-targets.cmake")
+        file(GLOB _gfnff_module_dirs "''${PACKAGE_PREFIX_DIR}/include/gfnff/*")
+        set_property(TARGET gfnff::gfnff APPEND PROPERTY
+          INTERFACE_INCLUDE_DIRECTORIES "''${_gfnff_module_dirs}")
         EOF
-
-        moddir=$(echo $out/include/pvol/*)
-        if [ -d "$moddir" ]; then
-          echo "module gfnff_interface" > gfnff_interface.F90
-          echo "  use libpvol_interface" >> gfnff_interface.F90
-          echo "  implicit none" >> gfnff_interface.F90
-          echo "end module gfnff_interface" >> gfnff_interface.F90
-          gfortran -c gfnff_interface.F90 -I$out/include -I$moddir
-          cp gfnff_interface.mod $moddir/
-        fi
       '';
       dontFixup = true;
     };
