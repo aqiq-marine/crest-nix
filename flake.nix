@@ -288,25 +288,8 @@
       postPatch = ''
         substituteInPlace CMakeLists.txt \
           --replace 'if(NOT TARGET "gfn0::gfn0" AND WITH_GFN0)' 'if(WITH_GFN0)' || true
-        chmod +w src/calculator/gfnff_api.F90 src/calculator/tblite_api.F90
+        chmod +w src/calculator/tblite_api.F90
         python3 -c 'import re
-path = "src/calculator/gfnff_api.F90"
-with open(path) as f:
-    content = f.read()
-content = content.replace("  type(coord) :: refmol", "  type(coord) :: refmol\n    integer :: printlevel")
-content = content.replace("    io = 0\n#ifdef WITH_GFNFF", "    io = 0\n    printlevel = 0\n    if (present(pr)) then\n      if (pr) printlevel = 2\n    end if\n#ifdef WITH_GFNFF")
-content = content.replace("print=pr", "printlevel=printlevel")
-content = content.replace("iunit=iunit", "printunit=iunit")
-content = re.sub(r"allocated\s*\([^)]*solvation[^)]*\)", ".false.", content, flags=re.IGNORECASE)
-content = re.sub(r"subroutine gfnff_dump_sasa.*?end subroutine gfnff_dump_sasa", """subroutine gfnff_dump_sasa(ff_dat,nat,atlist)
-    implicit none
-    type(gfnff_data),intent(in) :: ff_dat
-    logical,intent(in) :: atlist(nat)
-    integer,intent(in) :: nat
-  end subroutine gfnff_dump_sasa""", content, flags=re.DOTALL | re.IGNORECASE)
-with open(path, "w") as f:
-    f.write(content)
-
 path2 = "src/calculator/tblite_api.F90"
 with open(path2) as f:
     c2 = f.read()
