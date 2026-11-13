@@ -241,6 +241,7 @@
         "-Dtoml-f_DIR=${toml-f}/lib/cmake/toml-f"
         "-Dmctc-lib_DIR=${mctc-lib}/lib/cmake/mctc-lib"
         "-Dmstore_DIR=${mstore}/lib/cmake/mstore"
+        "-Dmulticharge_DIR=${legacyMulticharge}/lib/cmake/multicharge"
         "-Dxtb_DIR=${xtb}/lib/cmake/xtb"
         "-Dpybind11_DIR=${pkgs.python3Packages.pybind11}/share/cmake/pybind11"
       ];
@@ -377,7 +378,7 @@ with open(path3, "w") as f:
         toml-f
         mctc-lib
         mstore
-        multicharge
+        legacyMulticharge
         dftd4
         simple-dftd3
         gfn0
