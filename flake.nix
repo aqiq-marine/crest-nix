@@ -152,6 +152,7 @@
       src = legacyTomlFSrc;
       nativeBuildInputs = commonNative;
       postPatch = ''
+        substituteInPlace CMakeLists.txt --replace 'add_subdirectory("test")' "" || true
         substituteInPlace meson.build --replace "subdir('test')" "" || true
       '';
       dontFixup = true;
@@ -200,6 +201,7 @@
       buildInputs = [ legacyMctcLib legacyMstore legacyTomlF ] ++ linalg;
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
+        "-DWITH_TESTS=OFF"
         "-DFETCHCONTENT_FULLY_DISCONNECTED=ON"
         "-Dtoml-f_DIR=${legacyTomlF}/lib/cmake/toml-f"
         "-Dmctc-lib_DIR=${legacyMctcLib}/lib/cmake/mctc-lib"
