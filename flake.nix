@@ -37,6 +37,14 @@
       sha256 = "sha256-33cKyUYnG3KJ54oAh2zOv6frRN/i2XKeVDpEdISlncE=";
     };
 
+    # Match the tblite submodule pinned by CREST v3.0.2.
+    tbliteSrc = pkgs.fetchFromGitHub {
+      owner = "pprcht";
+      repo = "tblite";
+      rev = "4556e28f391573b3c80c94beb7c56313005d5269";
+      sha256 = pkgs.lib.fakeHash;
+    };
+
     toml-f = stdenv.mkDerivation {
       pname = "toml-f";
       version = "0.5.1";
@@ -119,8 +127,8 @@
 
     tblite = stdenv.mkDerivation {
       pname = "tblite";
-      version = "0.6.0";
-      src = pkgs.tblite.src;
+      version = "0.3.0";
+      src = tbliteSrc;
       nativeBuildInputs = commonNative;
       buildInputs = [ mctc-lib mstore toml-f multicharge dftd4 simple-dftd3 ] ++ linalg;
       cmakeFlags = [
@@ -282,18 +290,7 @@
       postPatch = ''
         substituteInPlace CMakeLists.txt \
           --replace 'if(NOT TARGET "gfn0::gfn0" AND WITH_GFN0)' 'if(WITH_GFN0)' || true
-        chmod +w src/calculator/tblite_api.F90
         python3 -c 'import re
-path2 = "src/calculator/tblite_api.F90"
-with open(path2) as f:
-    c2 = f.read()
-c2 = re.sub(r"^\s*.*%method=.*\n", "", c2, flags=re.MULTILINE)
-c2 = re.sub(r"^\s*.*%xtb=.*\n", "", c2, flags=re.MULTILINE)
-c2 = c2.replace("eeq_guess,", "")
-c2 = c2.replace("call eeq_guess(mctcmol,tblite%calc,tblite%wfn)", "! call eeq_guess")
-with open(path2, "w") as f:
-    f.write(c2)
-
 path3 = "src/symmetry_i.c"
 with open(path3) as f:
     c3 = f.read()
