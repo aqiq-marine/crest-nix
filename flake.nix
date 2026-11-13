@@ -185,13 +185,14 @@
       version = "0.2.0";
       src = legacyMultichargeSrc;
       nativeBuildInputs = commonNative;
-      buildInputs = [ legacyMctcLib ] ++ linalg;
+      buildInputs = [ legacyMctcLib legacyMstore ] ++ linalg;
       postPatch = ''
         substituteInPlace CMakeLists.txt --replace 'add_subdirectory("test")' "" || true
       '';
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
         "-Dmctc-lib_DIR=${legacyMctcLib}/lib/cmake/mctc-lib"
+        "-Dmstore_DIR=${legacyMstore}/lib/cmake/mstore"
       ];
       dontFixup = true;
     };
