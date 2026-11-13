@@ -108,6 +108,106 @@
       dontFixup = true;
     };
 
+    # tblite 0.3.0 (CREST v3.0.2) expects the dependency generation
+    # recorded in its subproject wraps. Keep this stack separate from the
+    # newer libraries used by GFN0/GFN-FF.
+    legacyTomlFSrc = pkgs.fetchFromGitHub {
+      owner = "toml-f";
+      repo = "toml-f";
+      rev = "v0.4.0";
+      sha256 = pkgs.lib.fakeHash;
+    };
+
+    legacyMctcLibSrc = pkgs.fetchFromGitHub {
+      owner = "grimme-lab";
+      repo = "mctc-lib";
+      rev = "v0.3.1";
+      sha256 = pkgs.lib.fakeHash;
+    };
+
+    legacyMstoreSrc = pkgs.fetchFromGitHub {
+      owner = "grimme-lab";
+      repo = "mstore";
+      rev = "v0.3.0";
+      sha256 = pkgs.lib.fakeHash;
+    };
+
+    legacyMultichargeSrc = pkgs.fetchFromGitHub {
+      owner = "grimme-lab";
+      repo = "multicharge";
+      rev = "v0.2.0";
+      sha256 = pkgs.lib.fakeHash;
+    };
+
+    legacySimpleDftd3Src = pkgs.fetchFromGitHub {
+      owner = "dftd3";
+      repo = "simple-dftd3";
+      rev = "v0.7.0";
+      sha256 = pkgs.lib.fakeHash;
+    };
+
+    legacyTomlF = stdenv.mkDerivation {
+      pname = "toml-f";
+      version = "0.4.0";
+      src = legacyTomlFSrc;
+      nativeBuildInputs = commonNative;
+      postPatch = ''
+        substituteInPlace meson.build --replace "subdir('test')" "" || true
+      '';
+      dontFixup = true;
+    };
+
+    legacyMctcLib = stdenv.mkDerivation {
+      pname = "mctc-lib";
+      version = "0.3.1";
+      src = legacyMctcLibSrc;
+      nativeBuildInputs = commonNative;
+      cmakeFlags = [ "-DCMAKE_BUILD_TYPE=Release" "-DWITH_OpenMP=OFF" ];
+      dontFixup = true;
+    };
+
+    legacyMstore = stdenv.mkDerivation {
+      pname = "mstore";
+      version = "0.3.0";
+      src = legacyMstoreSrc;
+      nativeBuildInputs = commonNative;
+      buildInputs = [ legacyMctcLib ] ++ linalg;
+      cmakeFlags = [
+        "-DCMAKE_BUILD_TYPE=Release"
+        "-Dmctc-lib_DIR=${legacyMctcLib}/lib/cmake/mctc-lib"
+      ];
+      dontFixup = true;
+    };
+
+    legacyMulticharge = stdenv.mkDerivation {
+      pname = "multicharge";
+      version = "0.2.0";
+      src = legacyMultichargeSrc;
+      nativeBuildInputs = commonNative;
+      buildInputs = [ legacyMctcLib ] ++ linalg;
+      cmakeFlags = [
+        "-DCMAKE_BUILD_TYPE=Release"
+        "-Dmctc-lib_DIR=${legacyMctcLib}/lib/cmake/mctc-lib"
+      ];
+      dontFixup = true;
+    };
+
+    legacySimpleDftd3 = stdenv.mkDerivation {
+      pname = "simple-dftd3";
+      version = "0.7.0";
+      src = legacySimpleDftd3Src;
+      nativeBuildInputs = commonNative ++ [ pkgs.python3 ];
+      buildInputs = [ legacyMctcLib legacyMstore legacyTomlF ] ++ linalg;
+      cmakeFlags = [
+        "-DCMAKE_BUILD_TYPE=Release"
+        "-DFETCHCONTENT_FULLY_DISCONNECTED=ON"
+        "-Dtoml-f_DIR=${legacyTomlF}/lib/cmake/toml-f"
+        "-Dmctc-lib_DIR=${legacyMctcLib}/lib/cmake/mctc-lib"
+        "-Dmstore_DIR=${legacyMstore}/lib/cmake/mstore"
+      ];
+      dontFixup = true;
+    };
+
     dftd4Src = pkgs.fetchFromGitHub {
       owner = "dftd4";
       repo = "dftd4";
@@ -120,14 +220,14 @@
       version = "3.4.0";
       src = dftd4Src;
       nativeBuildInputs = commonNative;
-      buildInputs = [ mctc-lib mstore multicharge toml-f ] ++ linalg;
+      buildInputs = [ legacyMctcLib legacyMstore legacyMulticharge legacyTomlF ] ++ linalg;
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
         "-DFETCHCONTENT_FULLY_DISCONNECTED=ON"
-        "-Dtoml-f_DIR=${toml-f}/lib/cmake/toml-f"
-        "-Dmctc-lib_DIR=${mctc-lib}/lib/cmake/mctc-lib"
-        "-Dmstore_DIR=${mstore}/lib/cmake/mstore"
-        "-Dmulticharge_DIR=${multicharge}/lib/cmake/multicharge"
+        "-Dtoml-f_DIR=${legacyTomlF}/lib/cmake/toml-f"
+        "-Dmctc-lib_DIR=${legacyMctcLib}/lib/cmake/mctc-lib"
+        "-Dmstore_DIR=${legacyMstore}/lib/cmake/mstore"
+        "-Dmulticharge_DIR=${legacyMulticharge}/lib/cmake/multicharge"
       ];
       dontFixup = true;
     };
@@ -137,14 +237,14 @@
       version = "0.3.0";
       src = tbliteSrc;
       nativeBuildInputs = commonNative;
-      buildInputs = [ mctc-lib mstore toml-f multicharge dftd4 simple-dftd3 ] ++ linalg;
+      buildInputs = [ legacyMctcLib legacyMstore legacyTomlF legacyMulticharge dftd4 legacySimpleDftd3 ] ++ linalg;
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
         "-DFETCHCONTENT_FULLY_DISCONNECTED=ON"
-        "-Dtoml-f_DIR=${toml-f}/lib/cmake/toml-f"
-        "-Dmctc-lib_DIR=${mctc-lib}/lib/cmake/mctc-lib"
-        "-Dmstore_DIR=${mstore}/lib/cmake/mstore"
-        "-Ds-dftd3_DIR=${simple-dftd3}/lib/cmake/s-dftd3"
+        "-Dtoml-f_DIR=${legacyTomlF}/lib/cmake/toml-f"
+        "-Dmctc-lib_DIR=${legacyMctcLib}/lib/cmake/mctc-lib"
+        "-Dmstore_DIR=${legacyMstore}/lib/cmake/mstore"
+        "-Ds-dftd3_DIR=${legacySimpleDftd3}/lib/cmake/s-dftd3"
         "-Ddftd4_DIR=${dftd4}/lib/cmake/dftd4"
       ];
       dontFixup = true;
