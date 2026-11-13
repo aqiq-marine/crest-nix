@@ -27,7 +27,7 @@
       owner = "pprcht";
       repo = "gfnff";
       rev = "42963235cba66f81575f17b2dba8be7acf2a440d";
-      sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+      sha256 = "sha256-Og/RL33Jz9okweq18NIKNsOYay+BF9qZHv9zlELMozI=";
     };
 
     lwoniomSrc = pkgs.fetchFromGitHub {
