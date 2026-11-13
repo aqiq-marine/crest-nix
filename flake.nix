@@ -193,9 +193,9 @@
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
         "-DFETCHCONTENT_FULLY_DISCONNECTED=ON"
-        "-Dtoml-f_DIR=${legacyTomlF}/lib/cmake/toml-f"
-        "-Dmctc-lib_DIR=${legacyMctcLib}/lib/cmake/mctc-lib"
-        "-Dmstore_DIR=${legacyMstore}/lib/cmake/mstore"
+        "-Dtoml-f_DIR=${toml-f}/lib/cmake/toml-f"
+        "-Dmctc-lib_DIR=${mctc-lib}/lib/cmake/mctc-lib"
+        "-Dmstore_DIR=${mstore}/lib/cmake/mstore"
         "-Ds-dftd3_DIR=${legacySimpleDftd3}/lib/cmake/s-dftd3"
         "-Ddftd4_DIR=${dftd4}/lib/cmake/dftd4"
       ];
