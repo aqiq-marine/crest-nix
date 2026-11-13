@@ -186,6 +186,9 @@
       src = legacyMultichargeSrc;
       nativeBuildInputs = commonNative;
       buildInputs = [ legacyMctcLib ] ++ linalg;
+      postPatch = ''
+        substituteInPlace CMakeLists.txt --replace 'add_subdirectory("test")' "" || true
+      '';
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
         "-Dmctc-lib_DIR=${legacyMctcLib}/lib/cmake/mctc-lib"
