@@ -143,7 +143,7 @@
       owner = "dftd3";
       repo = "simple-dftd3";
       rev = "v0.7.0";
-      sha256 = pkgs.lib.fakeHash;
+      sha256 = "sha256-5OvmMgjD8ujjKHkuw4NT8hEXKh5YPxuBl/Mu6g2/KIA=";
     };
 
     legacyTomlF = stdenv.mkDerivation {
