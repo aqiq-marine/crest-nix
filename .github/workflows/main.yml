@@ -48,6 +48,13 @@ jobs:
           gzip -dc /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod | head -n 3 || true
           echo "=== decompressed module around parser error ==="
           gzip -dc /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod | sed -n '1098,1107p' || true
+          echo "=== tblite module files ==="
+          find /nix/store/*tblite-0.3.0*/include -name 'tblite_wavefunction.mod' -print || true
+          echo "=== tblite module metadata ==="
+          f=$(find /nix/store/*tblite-0.3.0*/include -name 'tblite_wavefunction.mod' -print -quit)
+          file "$f" || true
+          ls -lh "$f" || true
+          gzip -dc "$f" | sed -n '130,145p' || true
           echo "=== compiler version ==="
           gfortran --version || true
 
