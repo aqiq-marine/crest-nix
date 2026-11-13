@@ -115,14 +115,14 @@
       owner = "toml-f";
       repo = "toml-f";
       rev = "v0.4.0";
-      sha256 = "sha256-AXjg/ZsitdDf9fNoGVmVal1iZ4/sxjJb7A9W4yye/rg=";
+      sha256 = pkgs.lib.fakeHash;
     };
 
     legacyMctcLibSrc = pkgs.fetchFromGitHub {
       owner = "grimme-lab";
       repo = "mctc-lib";
       rev = "v0.3.1";
-      sha256 = pkgs.lib.fakeHash;
+      sha256 = "sha256-AXjg/ZsitdDf9fNoGVmVal1iZ4/sxjJb7A9W4yye/rg=";
     };
 
     legacyMstoreSrc = pkgs.fetchFromGitHub {
