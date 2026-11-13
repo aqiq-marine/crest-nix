@@ -112,7 +112,7 @@
       owner = "dftd4";
       repo = "dftd4";
       rev = "v3.4.0";
-      sha256 = pkgs.lib.fakeHash;
+      sha256 = "sha256-YJ4btnKQVeaE/zwatBR/OEH5qdiQOTqAFga1CRz+EWQ=";
     };
 
     dftd4 = stdenv.mkDerivation {
