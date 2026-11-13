@@ -115,7 +115,7 @@
       owner = "toml-f";
       repo = "toml-f";
       rev = "v0.4.0";
-      sha256 = pkgs.lib.fakeHash;
+      sha256 = "sha256-pnzdbm+5XMXgkggbPBn/qNAV5D/WEfMSTQu6hm0u/TE=";
     };
 
     legacyMctcLibSrc = pkgs.fetchFromGitHub {
