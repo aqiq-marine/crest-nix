@@ -136,7 +136,7 @@
       owner = "grimme-lab";
       repo = "multicharge";
       rev = "v0.2.0";
-      sha256 = pkgs.lib.fakeHash;
+      sha256 = "sha256-oUI5x5/Gd0EZBb1w+0jlJUF9X51FnkHFu8H7KctqXl0=";
     };
 
     legacySimpleDftd3Src = pkgs.fetchFromGitHub {
