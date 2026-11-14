@@ -243,6 +243,8 @@
         "-DINSTALL_MODULES=ON"
         "-Dtoml-f_DIR=${toml-f}/lib/cmake/toml-f"
         "-Dmctc-lib_DIR=${mctc-lib}/lib/cmake/mctc-lib"
+        "-Dmstore_DIR=${mstore}/lib/cmake/mstore"
+        "-Dmulticharge_DIR=${multicharge}/lib/cmake/multicharge"
         "-Ddftd4_DIR=${dftd4}/lib/cmake/dftd4"
         "-Ds-dftd3_DIR=${simple-dftd3}/lib/cmake/s-dftd3"
         "-Dtblite_DIR=${tblite}/lib/cmake/tblite"
