@@ -227,7 +227,7 @@
       pname = "xtb";
       version = "6.7.1";
       src = xtbSrc;
-      nativeBuildInputs = commonNative;
+      nativeBuildInputs = commonNative ++ [ pkgs.python3 ];
       buildInputs = [ mctc-lib tblite test-drive ] ++ linalg;
       postPatch = ''
         python3 -c 'import re
