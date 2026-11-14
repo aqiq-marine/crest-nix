@@ -39,7 +39,7 @@
       owner = "crest-lab";
       repo = "lwoniom";
       rev = "ab66c7ebc3066328a8fc313dc783aec9b773cad2";
-      sha256 = pkgs.lib.fakeHash;
+      sha256 = "sha256-9FFlaGEHhsdS+23/7FnrteGwI9pvHb/q5A8C3iJxwnQ=";
     };
 
     # Match the tblite submodule pinned by CREST v3.0.2.
