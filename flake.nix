@@ -25,7 +25,7 @@
       owner = "pprcht";
       repo = "gfn0";
       rev = "584cec4b47da23bf3634ef0dd798a1639fcc5e47";
-      sha256 = pkgs.lib.fakeHash;
+      sha256 = "sha256-DULglQ144lLWK7sJkOEtMVmEIokOhYmrH6myBtfcNaA=";
     };
 
     gfnffSrc = pkgs.fetchFromGitHub {
