@@ -32,6 +32,16 @@ jobs:
       - name: Show logs
         if: failure()
         run: |
+          echo "=== xTB build log ==="
+          for xtb_drv in /nix/store/*-xtb-*.drv; do
+            echo "-- $xtb_drv"
+            nix log "$xtb_drv" || true
+          done
+          echo "=== test-drive build log ==="
+          for test_drv in /nix/store/*-test-drive-*.drv; do
+            echo "-- $test_drv"
+            nix log "$test_drv" || true
+          done
           echo "=== lwoniom build log ==="
           for lwoniom_drv in /nix/store/*-lwoniom-*.drv; do
             echo "-- $lwoniom_drv"
