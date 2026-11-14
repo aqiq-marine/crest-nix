@@ -18,7 +18,7 @@
       owner = "fortran-lang";
       repo = "test-drive";
       rev = "a78870c8028168a8270a853b8aa9ef922f198718";
-      sha256 = pkgs.lib.fakeHash;
+      sha256 = "sha256-F+BVDz5zy28EiHDhMkFI0E4YI04yTpNP4u5ZPHwSktg=";
     };
 
     gfn0Src = pkgs.fetchFromGitHub {
