@@ -21,6 +21,25 @@
       sha256 = "sha256-F+BVDz5zy28EiHDhMkFI0E4YI04yTpNP4u5ZPHwSktg=";
     };
 
+    test-drive = stdenv.mkDerivation {
+      pname = "test-drive";
+      version = "0.4.0";
+      src = testDriveSrc;
+      nativeBuildInputs = commonNative;
+      cmakeFlags = [
+        "-DCMAKE_BUILD_TYPE=Release"
+        "-DBUILD_TESTING=OFF"
+      ];
+      dontFixup = true;
+    };
+
+    xtbSrc = pkgs.fetchFromGitHub {
+      owner = "grimme-lab";
+      repo = "xtb";
+      rev = "v6.7.1";
+      sha256 = pkgs.lib.fakeHash;
+    };
+
     gfn0Src = pkgs.fetchFromGitHub {
       owner = "pprcht";
       repo = "gfn0";
@@ -213,23 +232,31 @@
     xtb = stdenv.mkDerivation {
       pname = "xtb";
       version = "6.7.1";
-      src = pkgs.xtb;
-      phases = [ "installPhase" ];
-      installPhase = ''
-        mkdir -p $out/lib/cmake/xtb $out/bin $out/include $out/lib
-        ln -s ${pkgs.xtb}/bin/* $out/bin/
-        ln -s ${pkgs.xtb}/include/* $out/include/
-        ln -s ${pkgs.xtb}/lib/* $out/lib/
-
+      src = xtbSrc;
+      nativeBuildInputs = commonNative;
+      buildInputs = [ mctc-lib tblite test-drive ] ++ linalg;
+      cmakeFlags = [
+        "-DCMAKE_BUILD_TYPE=Release"
+        "-DWITH_OpenMP=ON"
+        "-DWITH_TBLITE=ON"
+        "-DWITH_CPCMX=OFF"
+        "-DINSTALL_MODULES=ON"
+        "-Dmctc-lib_DIR=${mctc-lib}/lib/cmake/mctc-lib"
+        "-Dtblite_DIR=${tblite}/lib/cmake/tblite"
+        "-Dtest-drive_DIR=${test-drive}/lib/cmake/test-drive"
+      ];
+      postInstall = ''
+        mkdir -p $out/lib/cmake/xtb
         cat << 'EOF' > $out/lib/cmake/xtb/xtbConfig.cmake
-        set(xtb_FOUND TRUE)
-        add_library(xtb::xtb SHARED IMPORTED)
-        set_target_properties(xtb::xtb PROPERTIES
-          IMPORTED_LOCATION "${pkgs.xtb}/lib/libxtb.so"
-          INTERFACE_INCLUDE_DIRECTORIES "${pkgs.xtb}/include"
-        )
+        include("${CMAKE_CURRENT_LIST_DIR}/xtb-targets.cmake")
+        if(NOT TARGET xtb::xtb)
+          add_library(xtb::xtb INTERFACE IMPORTED)
+          set_property(TARGET xtb::xtb PROPERTY
+            INTERFACE_LINK_LIBRARIES xtb::lib-xtb-static)
+        endif()
         EOF
       '';
+      dontFixup = true;
     };
 
     gfn0 = stdenv.mkDerivation {
@@ -420,7 +447,7 @@ with open(path3, "w") as f:
   in
   {
     packages = {
-      inherit crest xtb tblite mctc-lib mstore simple-dftd3 multicharge dftd4 gfn0 gfnff lwoniom;
+      inherit crest xtb tblite test-drive mctc-lib mstore simple-dftd3 multicharge dftd4 gfn0 gfnff lwoniom;
       default = crest;
     };
 
