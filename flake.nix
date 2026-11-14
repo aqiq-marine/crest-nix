@@ -60,6 +60,62 @@
 
     simple-dftd3 = legacySimpleDftd3;
 
+    # Dependency versions required by the CREST 3.0.2 tblite submodule.
+    legacyTomlFSrc = pkgs.fetchFromGitHub {
+      owner = "toml-f";
+      repo = "toml-f";
+      rev = "59a62ce59ceb85ef3e8be3f733b32636c61a8f10";
+      sha256 = pkgs.lib.fakeHash;
+    };
+
+    legacyMctcLibSrc = pkgs.fetchFromGitHub {
+      owner = "grimme-lab";
+      repo = "mctc-lib";
+      rev = "v0.3.1";
+      sha256 = "sha256-AXjg/ZsitdDf9fNoGVmVal1iZ4/sxjJb7A9W4yye/rg=";
+    };
+
+    legacyMstoreSrc = pkgs.fetchFromGitHub {
+      owner = "grimme-lab";
+      repo = "mstore";
+      rev = "v0.3.0";
+      sha256 = "sha256-zfrxdrZ1Um52qTRNGJoqZNQuHhK3xM/mKfk0aBLrcjw=";
+    };
+
+    legacyTomlF = stdenv.mkDerivation {
+      pname = "toml-f";
+      version = "0.4.2";
+      src = legacyTomlFSrc;
+      nativeBuildInputs = commonNative;
+      postPatch = ''
+        substituteInPlace CMakeLists.txt --replace 'add_subdirectory("test")' "" || true
+        substituteInPlace meson.build --replace "subdir('test')" "" || true
+      '';
+      dontFixup = true;
+    };
+
+    legacyMctcLib = stdenv.mkDerivation {
+      pname = "mctc-lib";
+      version = "0.3.1";
+      src = legacyMctcLibSrc;
+      nativeBuildInputs = commonNative;
+      cmakeFlags = [ "-DCMAKE_BUILD_TYPE=Release" "-DWITH_OpenMP=OFF" ];
+      dontFixup = true;
+    };
+
+    legacyMstore = stdenv.mkDerivation {
+      pname = "mstore";
+      version = "0.3.0";
+      src = legacyMstoreSrc;
+      nativeBuildInputs = commonNative;
+      buildInputs = [ legacyMctcLib ] ++ linalg;
+      cmakeFlags = [
+        "-DCMAKE_BUILD_TYPE=Release"
+        "-Dmctc-lib_DIR=${legacyMctcLib}/lib/cmake/mctc-lib"
+      ];
+      dontFixup = true;
+    };
+
     # tblite 0.3.0 and DFT-D4 3.4.0 use the older multicharge API.
     # Keep that package version pinned, but share the current mctc-lib,
     # mstore and toml-f targets with the rest of the build to avoid duplicate
