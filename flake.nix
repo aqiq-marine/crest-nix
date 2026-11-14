@@ -14,13 +14,18 @@
 
     commonNative = with pkgs; [ cmake gfortran pkg-config meson ninja ];
     linalg = with pkgs; [ openblas lapack ];
-    testDriveSrc = pkgs.test-drive.src;
+    testDriveSrc = pkgs.fetchFromGitHub {
+      owner = "fortran-lang";
+      repo = "test-drive";
+      rev = "a78870c8028168a8270a853b8aa9ef922f198718";
+      sha256 = pkgs.lib.fakeHash;
+    };
 
     gfn0Src = pkgs.fetchFromGitHub {
       owner = "pprcht";
       repo = "gfn0";
-      rev = "main";
-      sha256 = "sha256-84hBN9uaEoOEu7OEve8CoLOBoHc1XR02pYfBY5cJFXU=";
+      rev = "584cec4b47da23bf3634ef0dd798a1639fcc5e47";
+      sha256 = pkgs.lib.fakeHash;
     };
 
     gfnffSrc = pkgs.fetchFromGitHub {
@@ -33,8 +38,8 @@
     lwoniomSrc = pkgs.fetchFromGitHub {
       owner = "crest-lab";
       repo = "lwoniom";
-      rev = "main";
-      sha256 = "sha256-33cKyUYnG3KJ54oAh2zOv6frRN/i2XKeVDpEdISlncE=";
+      rev = "ab66c7ebc3066328a8fc313dc783aec9b773cad2";
+      sha256 = pkgs.lib.fakeHash;
     };
 
     # Match the tblite submodule pinned by CREST v3.0.2.
