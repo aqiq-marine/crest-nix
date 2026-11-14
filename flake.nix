@@ -37,7 +37,7 @@
       owner = "grimme-lab";
       repo = "xtb";
       rev = "v6.7.1";
-      sha256 = pkgs.lib.fakeHash;
+      sha256 = "sha256-+qgXSMwzD0xSycZIRTokt77fZHHZQ++Npzr7NLlypOA=";
     };
 
     gfn0Src = pkgs.fetchFromGitHub {
