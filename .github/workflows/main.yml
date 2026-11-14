@@ -32,51 +32,10 @@ jobs:
       - name: Show logs
         if: failure()
         run: |
-          echo "=== xTB build log ==="
-          for xtb_drv in /nix/store/*-xtb-*.drv; do
-            echo "-- $xtb_drv"
-            nix log "$xtb_drv" || true
+          for drv in /nix/store/*-crest-*.drv /nix/store/*-xtb-*.drv /nix/store/*-tblite-*.drv; do
+            echo "-- $drv"
+            nix log "$drv" || true
           done
-          echo "=== test-drive build log ==="
-          for test_drv in /nix/store/*-test-drive-*.drv; do
-            echo "-- $test_drv"
-            nix log "$test_drv" || true
-          done
-          echo "=== lwoniom build log ==="
-          for lwoniom_drv in /nix/store/*-lwoniom-*.drv; do
-            echo "-- $lwoniom_drv"
-            nix log "$lwoniom_drv" || true
-          done
-          echo "=== installed lwoniom modules ==="
-          find /nix/store/*-lwoniom-*/include -type f -print || true
-          echo "=== installed lwoniom config ==="
-          cat /nix/store/*-lwoniom-*/lib/cmake/lwoniom/lwoniomConfig.cmake || true
-          drv=$(ls /nix/store/*simple-dftd3-*.drv | head -n1)
-          echo "-- log for s-dftd3 $drv -------------------------"
-          nix log "$drv" || true
-          drv2=$(ls /nix/store/*tblite-*.drv | head -n1)
-          echo "-- log for tblite $drv2 -------------------------------"
-          nix log "$drv2" || true
-          echo "=== file info ==="
-          file /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod || true
-          echo "=== size ==="
-          ls -lh /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod || true
-          echo "=== hexdump ==="
-          head -c 64 /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod | hexdump -C || true
-          echo "=== decompressed module header ==="
-          gzip -dc /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod | head -n 3 || true
-          echo "=== decompressed module around parser error ==="
-          gzip -dc /nix/store/*simple-dftd3*/include/s-dftd3/gcc-14.3.0/dftd3.mod | sed -n '1098,1107p' || true
-          echo "=== tblite module files ==="
-          find /nix/store/*tblite-0.3.0*/include -name 'tblite_wavefunction.mod' -print || true
-          echo "=== tblite module metadata ==="
-          f=$(find /nix/store/*tblite-0.3.0*/include -name 'tblite_wavefunction.mod' -print -quit)
-          file "$f" || true
-          ls -lh "$f" || true
-          gzip -dc "$f" | awk 'NR==139 { print substr($0,1,1000) }' || true
-          gzip -dc "$f" | wc -l || true
-          echo "=== compiler version ==="
-          gfortran --version || true
 
       - name: Run binary
         run: |
