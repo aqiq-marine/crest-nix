@@ -229,6 +229,27 @@
       src = xtbSrc;
       nativeBuildInputs = commonNative;
       buildInputs = [ mctc-lib tblite test-drive ] ++ linalg;
+      postPatch = ''
+        python3 -c 'import re
+path = "symmetry/symmetry_i.c"
+with open(path) as f:
+    source = f.read()
+old_function = "int true(void){ return 1 ; }"
+new_function = "static int xtb_symmetry_always_true(void){ return 1 ; }"
+if source.count(old_function) != 1:
+    raise SystemExit("unexpected xtb symmetry_i.c true() definition")
+source = source.replace(old_function, new_function)
+source, count = re.subn(
+    r"(\{\s*\"[^\"]+\"\s*,\s*\"[^\"]*\"\s*,\s*)true(\s*\})",
+    r"\1xtb_symmetry_always_true\2",
+    source,
+)
+if count == 0:
+    raise SystemExit("could not patch xtb symmetry point-group callbacks")
+with open(path, "w") as f:
+    f.write(source)'
+      '';
+
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
         "-DWITH_OpenMP=ON"
