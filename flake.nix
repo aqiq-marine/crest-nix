@@ -241,7 +241,10 @@
         "-DWITH_TBLITE=ON"
         "-DWITH_CPCMX=OFF"
         "-DINSTALL_MODULES=ON"
+        "-Dtoml-f_DIR=${toml-f}/lib/cmake/toml-f"
         "-Dmctc-lib_DIR=${mctc-lib}/lib/cmake/mctc-lib"
+        "-Ddftd4_DIR=${dftd4}/lib/cmake/dftd4"
+        "-Ds-dftd3_DIR=${simple-dftd3}/lib/cmake/s-dftd3"
         "-Dtblite_DIR=${tblite}/lib/cmake/tblite"
         "-Dtest-drive_DIR=${test-drive}/lib/cmake/test-drive"
       ];
