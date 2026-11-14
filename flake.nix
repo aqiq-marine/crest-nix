@@ -381,7 +381,11 @@ with open(path, "w") as f:
         done
         mkdir -p $out/lib/cmake/lwoniom
         cat << 'EOF' > $out/lib/cmake/lwoniom/lwoniomConfig.cmake
+        get_filename_component(PACKAGE_PREFIX_DIR "''${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
         include("''${CMAKE_CURRENT_LIST_DIR}/lwoniom-targets.cmake")
+        file(GLOB _lwoniom_module_dirs "''${PACKAGE_PREFIX_DIR}/include/lwoniom/*")
+        set_property(TARGET lwoniom::lwoniom APPEND PROPERTY
+          INTERFACE_INCLUDE_DIRECTORIES "''${_lwoniom_module_dirs}")
         EOF
       '';
       dontFixup = true;
