@@ -69,42 +69,42 @@
       sha256 = "sha256-JmTEnvYqA73vmWQe4cpjvp6/Wwb+elSMDdHTPwD3/jc=";
     };
 
-    toml-f = legacyTomlF;
+    toml-f = toml-f;
 
-    mctc-lib = legacyMctcLib;
+    mctc-lib = mctc-lib;
 
-    mstore = legacyMstore;
+    mstore = mstore;
 
-    multicharge = legacyMulticharge;
+    multicharge = multicharge;
 
-    simple-dftd3 = legacySimpleDftd3;
+    simple-dftd3 = simple-dftd3;
 
     # Dependency versions required by the CREST 3.0.2 tblite submodule.
-    legacyTomlFSrc = pkgs.fetchFromGitHub {
+    tomlFSrc = pkgs.fetchFromGitHub {
       owner = "toml-f";
       repo = "toml-f";
       rev = "59a62ce59ceb85ef3e8be3f733b32636c61a8f10";
       sha256 = "sha256-GywzfbFWc4h2Baye3VL8SiljEOk7KyfVlyKmH+tjZBY=";
     };
 
-    legacyMctcLibSrc = pkgs.fetchFromGitHub {
+    mctcLibSrc = pkgs.fetchFromGitHub {
       owner = "grimme-lab";
       repo = "mctc-lib";
       rev = "v0.3.1";
       sha256 = "sha256-AXjg/ZsitdDf9fNoGVmVal1iZ4/sxjJb7A9W4yye/rg=";
     };
 
-    legacyMstoreSrc = pkgs.fetchFromGitHub {
+    mstoreSrc = pkgs.fetchFromGitHub {
       owner = "grimme-lab";
       repo = "mstore";
       rev = "v0.3.0";
       sha256 = "sha256-zfrxdrZ1Um52qTRNGJoqZNQuHhK3xM/mKfk0aBLrcjw=";
     };
 
-    legacyTomlF = stdenv.mkDerivation {
+    toml-f = stdenv.mkDerivation {
       pname = "toml-f";
       version = "0.4.2";
-      src = legacyTomlFSrc;
+      src = tomlFSrc;
       nativeBuildInputs = commonNative;
       postPatch = ''
         substituteInPlace CMakeLists.txt --replace 'add_subdirectory("test")' "" || true
@@ -113,24 +113,24 @@
       dontFixup = true;
     };
 
-    legacyMctcLib = stdenv.mkDerivation {
+    mctc-lib = stdenv.mkDerivation {
       pname = "mctc-lib";
       version = "0.3.1";
-      src = legacyMctcLibSrc;
+      src = mctcLibSrc;
       nativeBuildInputs = commonNative;
       cmakeFlags = [ "-DCMAKE_BUILD_TYPE=Release" "-DWITH_OpenMP=OFF" ];
       dontFixup = true;
     };
 
-    legacyMstore = stdenv.mkDerivation {
+    mstore = stdenv.mkDerivation {
       pname = "mstore";
       version = "0.3.0";
-      src = legacyMstoreSrc;
+      src = mstoreSrc;
       nativeBuildInputs = commonNative;
-      buildInputs = [ legacyMctcLib ] ++ linalg;
+      buildInputs = [ mctc-lib ] ++ linalg;
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
-        "-Dmctc-lib_DIR=${legacyMctcLib}/lib/cmake/mctc-lib"
+        "-Dmctc-lib_DIR=${mctc-lib}/lib/cmake/mctc-lib"
       ];
       dontFixup = true;
     };
@@ -139,24 +139,24 @@
     # Keep that package version pinned, but share the current mctc-lib,
     # mstore and toml-f targets with the rest of the build to avoid duplicate
     # Fortran module namespaces in CREST.
-    legacyMultichargeSrc = pkgs.fetchFromGitHub {
+    multichargeSrc = pkgs.fetchFromGitHub {
       owner = "grimme-lab";
       repo = "multicharge";
       rev = "v0.2.0";
       sha256 = "sha256-oUI5x5/Gd0EZBb1w+0jlJUF9X51FnkHFu8H7KctqXl0=";
     };
 
-    legacySimpleDftd3Src = pkgs.fetchFromGitHub {
+    simpleDftd3Src = pkgs.fetchFromGitHub {
       owner = "dftd3";
       repo = "simple-dftd3";
       rev = "v0.7.0";
       sha256 = "sha256-5OvmMgjD8ujjKHkuw4NT8hEXKh5YPxuBl/Mu6g2/KIA=";
     };
 
-    legacyMulticharge = stdenv.mkDerivation {
+    multicharge = stdenv.mkDerivation {
       pname = "multicharge";
       version = "0.2.0";
-      src = legacyMultichargeSrc;
+      src = multichargeSrc;
       nativeBuildInputs = commonNative;
       buildInputs = [ mctc-lib mstore ] ++ linalg;
       postPatch = ''
@@ -170,10 +170,10 @@
       dontFixup = true;
     };
 
-    legacySimpleDftd3 = stdenv.mkDerivation {
+    simple-dftd3 = stdenv.mkDerivation {
       pname = "simple-dftd3";
       version = "0.7.0";
-      src = legacySimpleDftd3Src;
+      src = simpleDftd3Src;
       nativeBuildInputs = commonNative ++ [ pkgs.python3 ];
       buildInputs = [ mctc-lib mstore toml-f ] ++ linalg;
       cmakeFlags = [
@@ -266,7 +266,7 @@
 
     gfn0 = stdenv.mkDerivation {
       pname = "gfn0";
-      version = "0.1.3";
+      version = "0.1";
       src = gfn0Src;
       nativeBuildInputs = commonNative ++ [ pkgs.python3 pkgs.python3Packages.pybind11 ];
       buildInputs = [ mctc-lib mstore toml-f xtb ] ++ linalg;
@@ -281,7 +281,7 @@
         "-Dtoml-f_DIR=${toml-f}/lib/cmake/toml-f"
         "-Dmctc-lib_DIR=${mctc-lib}/lib/cmake/mctc-lib"
         "-Dmstore_DIR=${mstore}/lib/cmake/mstore"
-        "-Dmulticharge_DIR=${legacyMulticharge}/lib/cmake/multicharge"
+        "-Dmulticharge_DIR=${multicharge}/lib/cmake/multicharge"
         "-Dxtb_DIR=${xtb}/lib/cmake/xtb"
         "-Dpybind11_DIR=${pkgs.python3Packages.pybind11}/share/cmake/pybind11"
       ];
@@ -303,7 +303,7 @@
 
     gfnff = stdenv.mkDerivation {
       pname = "gfnff";
-      version = "0.1.0";
+      version = "0.0.1";
       src = gfnffSrc;
       nativeBuildInputs = commonNative ++ [ pkgs.python3 pkgs.python3Packages.pybind11 ];
       buildInputs = [ mctc-lib mstore toml-f xtb simple-dftd3 dftd4 ] ++ linalg;
@@ -341,7 +341,7 @@
 
     lwoniom = stdenv.mkDerivation {
       pname = "lwoniom";
-      version = "0.1.0";
+      version = "0.0.1";
       src = lwoniomSrc;
       nativeBuildInputs = commonNative ++ [ pkgs.python3 pkgs.python3Packages.pybind11 ];
       buildInputs = [ mctc-lib mstore toml-f xtb gfn0 gfnff ] ++ linalg;
