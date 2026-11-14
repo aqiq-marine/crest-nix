@@ -228,7 +228,7 @@
       version = "6.7.1";
       src = xtbSrc;
       nativeBuildInputs = commonNative ++ [ pkgs.python3 ];
-      buildInputs = [ mctc-lib tblite test-drive ] ++ linalg;
+      buildInputs = [ mctc-lib test-drive ] ++ linalg;
       postPatch = ''
         python3 -c 'import re
 path = "symmetry/symmetry_i.c"
@@ -253,7 +253,7 @@ with open(path, "w") as f:
       cmakeFlags = [
         "-DCMAKE_BUILD_TYPE=Release"
         "-DWITH_OpenMP=ON"
-        "-DWITH_TBLITE=ON"
+        "-DWITH_TBLITE=OFF"
         "-DWITH_CPCMX=OFF"
         "-DINSTALL_MODULES=ON"
         "-Dtoml-f_DIR=${toml-f}/lib/cmake/toml-f"
@@ -262,7 +262,6 @@ with open(path, "w") as f:
         "-Dmulticharge_DIR=${multicharge}/lib/cmake/multicharge"
         "-Ddftd4_DIR=${dftd4}/lib/cmake/dftd4"
         "-Ds-dftd3_DIR=${simple-dftd3}/lib/cmake/s-dftd3"
-        "-Dtblite_DIR=${tblite}/lib/cmake/tblite"
         "-Dtest-drive_DIR=${test-drive}/lib/cmake/test-drive"
       ];
       postInstall = ''
