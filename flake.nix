@@ -248,7 +248,7 @@
       postInstall = ''
         mkdir -p $out/lib/cmake/xtb
         cat << 'EOF' > $out/lib/cmake/xtb/xtbConfig.cmake
-        include("${CMAKE_CURRENT_LIST_DIR}/xtb-targets.cmake")
+        include("''${CMAKE_CURRENT_LIST_DIR}/xtb-targets.cmake")
         if(NOT TARGET xtb::xtb)
           add_library(xtb::xtb INTERFACE IMPORTED)
           set_property(TARGET xtb::xtb PROPERTY
