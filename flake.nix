@@ -69,15 +69,10 @@
       sha256 = "sha256-JmTEnvYqA73vmWQe4cpjvp6/Wwb+elSMDdHTPwD3/jc=";
     };
 
-    toml-f = toml-f;
 
-    mctc-lib = mctc-lib;
 
-    mstore = mstore;
 
-    multicharge = multicharge;
 
-    simple-dftd3 = simple-dftd3;
 
     # Dependency versions required by the CREST 3.0.2 tblite submodule.
     tomlFSrc = pkgs.fetchFromGitHub {
@@ -136,9 +131,8 @@
     };
 
     # tblite 0.3.0 and DFT-D4 3.4.0 use the older multicharge API.
-    # Keep that package version pinned, but share the current mctc-lib,
-    # mstore and toml-f targets with the rest of the build to avoid duplicate
-    # Fortran module namespaces in CREST.
+    # Use the same dependency instances throughout the build so that CREST
+    # does not mix incompatible Fortran module interfaces.
     multichargeSrc = pkgs.fetchFromGitHub {
       owner = "grimme-lab";
       repo = "multicharge";
