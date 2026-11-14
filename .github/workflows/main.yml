@@ -32,6 +32,11 @@ jobs:
       - name: Show logs
         if: failure()
         run: |
+          echo "=== source derivation mappings ==="
+          for source_drv in /nix/store/*-source.drv; do
+            echo "-- $source_drv"
+            nix derivation show "$source_drv" 2>/dev/null | jq -r 'to_entries[0].value.env | [.url // "", .rev // "", .name // ""] | @tsv' || true
+          done
           drv=$(ls /nix/store/*simple-dftd3-*.drv | head -n1)
           echo "-- log for s-dftd3 $drv -------------------------"
           nix log "$drv" || true
